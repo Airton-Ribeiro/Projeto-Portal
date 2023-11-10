@@ -52,7 +52,7 @@ app.use(routes);
 
 app.on("pronto", () => {
   app.listen(3000, () => {
-    console.log("Acessar http://localhost:3000");
+    console.log("Acessar http://localhost:3000/login/index");
     console.log("Servidor executando na porta 3000");
   });
 });

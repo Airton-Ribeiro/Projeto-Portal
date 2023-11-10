@@ -3,9 +3,9 @@ const validator = require('validator');
 
 const ContatoSchema = new mongoose.Schema({
   nome: { type: String, required: true },
-  sobrenome: { type: String, required: false, default: '' },
-  email: { type: String, required: false, default: '' },
-  telefone: { type: Number, required: false, default: '' },
+  sobrenome: { type: String, required: true, default: '' },
+  email: { type: String, required: true, default: '' },
+  matricula: { type: Number, required: true, default: '' },
   criadoEm: {type: Date, default: Date.now },
   descricao: String
 });
@@ -51,14 +51,14 @@ class Contato {
           nome: this.body.nome,
           sobrenome: this.body.sobrenome,
           email: this.body.email,
-          telefone: this.body.telefone,
+          matricula: this.body.matricula,
         }
       }
       async contatoExists(){
         this.user = await ContatoModel.findOne({nome: this.body.nome});
-        this.telefone = await ContatoModel.findOne({telefone: this.body.telefone});
+        this.matricula = await ContatoModel.findOne({matricula: this.body.matricula});
         this.email = await ContatoModel.findOne({email: this.body.email});
-        if (this.user && this.email || this.telefone ) this.errors.push('Usuário já existe.');
+        if (this.user && this.email && this.matricula ) this.errors.push('Usuário já existe.');
       }
       async edit(id) {
         if(typeof id !== 'string') return;
@@ -83,7 +83,6 @@ class Contato {
     const contato = await ContatoModel.findOneAndDelete({_id: id});
     return contato;
 } 
-
 
 }
 

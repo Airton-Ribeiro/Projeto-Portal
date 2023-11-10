@@ -69,3 +69,11 @@ exports.edit = async (req, res ) => {
       req.session.save(() => res.redirect(`back`));
       return;
   }
+
+  exports.avaliar = async (req, res) => {
+    if(!req.params.id) return res.render('404');
+    const contato = await Contato.buscaPorId(req.params.id);
+    if(!contato) return res.render('404');
+    res.render('atividade', { contato });
+};
+

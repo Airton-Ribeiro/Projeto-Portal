@@ -1,56 +1,38 @@
 <%- include('includes/head')%>
-<%- include('includes/nav')%>
 <div class="container">
   <div class="row">
     <div class="col-lg-2"></div>
 
     <div class="col-lg-8 my-3">
-      <h1 class="text-center">Remígio & CIA</h1>
-      <p class="text-center lead">Faça login ou crie sua conta abaixo</p>
+      <h1 class="text-center">SiGAC</h1>
+      <p class="text-center lead">Portal de envio de atividades complementares</p>
         <%- include('includes/messages') %>
       <div class="row">
         <div class="col-lg">
-          <h4>Faça seu cadastro</h4>
-          <p>Caso você não tenha conta</p>
-            <form class="form-cadastro" action="/login/register" method="POST">
-              <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+          <h4>Envio de Atividade Aluno</h4>
+          <p>Area do aluno</p>
+          <form class="" action="/aluno/enviar" method="POST">
               <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" name="email">
+                <button type="submit" class="btn btn-primary">Enviar Atividade</button>
               </div>
-              <div class="mb-3">
-                <label class="form-label">Senha</label>
-                <input type="password" class="form-control" name="password">
-              </div>
-              <button type="submit" class="btn btn-primary">Criar minha conta</button>
             </form>
-        </div>
-
-        <!-- Adicione a borda vertical usando classes do Bootstrap -->
-        <div class="border-left">
-          <!-- Conteúdo adicional aqui, se necessário -->
-        </div>
-
-        <div class="col-lg">
-          <h4>Faça seu login</h4>
-          <p>Se você já tem uma conta.</p>
-            <form class="form-login" action="/login/login" method="POST">
-              <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+              <form class="" action="/aluno/checar" method="POST">
               <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" class="form-control" name="email">
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Senha</label>
-                <input type="password" class="form-control" name="password">
-              </div>
-              <button type="submit" class="btn btn-primary">Entrar</button>
-          </form>
+                <button type="submit" class="btn btn-primary">Checar Atividades Enviadas</button>
+              </div>                     
+            </form>
+        </div>    
         </div>
       </div>
     </div>
-
     <div class="col-lg-2"></div>
   </div>
+</form>
+<form class="" action="/login/professor" method="POST">
+<div class="mb-3">
+  <button type="submit" class="btn btn-primary">Faça login como professor</button>
+</div>                     
+</form>
 </div>
+
 <%- include('includes/footer')%>

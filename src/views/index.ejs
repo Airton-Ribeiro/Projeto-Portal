@@ -5,27 +5,33 @@
         <div class="col-lg-2"></div>
 
         <div class="col-lg-8 my-4">
-          <h1 class="text-center">Agenda</h1>
-          <p class="text-center lead">Seus contatos estão abaixo</p>
+          <h1 class="text-center">Atividades</h1>
+          <p class="text-center lead">Atividades para validar</p>
 
          <%- include('includes/messages') %>
           <% if(contatos.length > 0) { %>
           <div class="responsive-table">
             <table class="table my-3">
+              <ul class="list-inline">
+                <li class="list-inline-item mr-3 ml-2" >Nome</li>
+                <li class="list-inline-item mr-4">Sobrenome</li>
+                <li class="list-inline-item mr-4">Matricula</li>
+                <li class="list-inline-item mr-4">Email</li>
+              </ul>
               <% contatos.forEach(contatos => { %>
                 <tr>
                   <td><%= contatos.nome %></td>
                   <td><%= contatos.sobrenome %></td>
-                  <td><%= contatos.telefone %></td>
+                  <td><%= contatos.matricula %></td>
                   <td><%= contatos.email %></td>
-                  <td><a href="/contato/index/<%= contatos._id %>"> Editar</a></td>
-                  <td><a class="text-danger" href="/contato/delete/<%= contatos._id %>"> Excluir</a></td>
+                  <td><a href="/contato/atividade/<%= contatos._id %>"> Avaliar Atividade</a></td>
+                  
                 </tr>
                 <% }); %>             
             </table>
           </div>
           <% } else { %>
-            <p class="text-center lead"> Não existem contatos na sua agenda.</p>
+            <p class="text-center lead"> Não existem atividades a serem avaliadas.</p>
             <% } %>
         </div>
 

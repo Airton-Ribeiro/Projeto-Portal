@@ -13,8 +13,8 @@ exports.middlewareGlobal = (req, res, next) => {
     };
 
     exports.checkCsrfError = (err, req, res, next) => {
-        if(err){
-            return res.render('404');
+        if (err && err.code !== 'EBADCSRFTOKEN') {
+            return next(err); // Erro CSRF não deve causar redirecionamento para a página de erro 404
         }
         next();
     };

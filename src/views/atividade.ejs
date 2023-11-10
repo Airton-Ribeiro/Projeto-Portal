@@ -1,0 +1,37 @@
+<%- include('includes/head')%>
+<%- include('includes/nav')%>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2"></div>
+
+        <div class="col-lg-8 my-4">
+          <h1 class="text-center">Atividade</h1>
+          <p class="text-center lead">Avalie a atividade abaixo</p>
+
+         <%- include('includes/messages') %>
+         <% if(contato._id) { %>
+          <form action="/contato/atividade/<%= contato._id %>" method="POST">
+           <% } else { %>
+             <form action="/contato/register" method="POST">
+             <% } %>
+             <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+             <div class="mb-3">
+            <p>Nome: <%= contato.nome %> <%= contato.sobrenome %></p>
+          </div>
+          <div class="mb-3">
+            <p>Email: <%= contato.email %></p>
+          </div>
+          <div class="mb-2">
+            <p>Matricula: <%= contato.matricula %></p>
+          </div>
+          <div class="mb-2">
+            <p>Descrição: <%= contato.descricao %></p>
+          </div>
+          <button type="submit" class="btn btn-success">Aceitar</button>
+          <button type="submit" class="btn btn-danger">Invalidar</button>
+        </form>
+        </div>
+        <div class="col-lg-2"></div>
+        </div>
+      </div>
+    <%- include('includes/footer')%>
