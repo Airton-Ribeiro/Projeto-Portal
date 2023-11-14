@@ -18,11 +18,11 @@
             <% } %>
             <input type="hidden" name="_csrf" value=<%= csrfToken %>>
             <div class="mb-3">
-              <label class="form-label">Nome</label>
+              <label class="form-label">Nome Completo</label>
               <input value="<%= contato.nome %>" type="text" class="form-control" name="nome">
             </div>
             <div class="mb-3">
-                <label class="form-label">Sobrenome</label>
+                <label class="form-label">Ano/Curso/Turma</label> <!--Adicionar no contato model-->
                 <input value="<%= contato.sobrenome %>" type="text" class="form-control" name="sobrenome">
               </div>
               <div class="mb-3">

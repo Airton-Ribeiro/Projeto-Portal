@@ -12,11 +12,12 @@
           <% if(contatos.length > 0) { %>
           <div class="responsive-table">
             <table class="table my-3">
-              <ul class="list-inline">
+              <ul class="list-inline display-flex">
                 <li class="list-inline-item mr-3 ml-2" >Nome</li>
                 <li class="list-inline-item mr-4">Sobrenome</li>
                 <li class="list-inline-item mr-4">Matricula</li>
                 <li class="list-inline-item mr-4">Email</li>
+                <li class="list-inline-item mr-4">Horas</li>
               </ul>
               <% contatos.forEach(contatos => { %>
                 <tr>
@@ -24,6 +25,7 @@
                   <td><%= contatos.sobrenome %></td>
                   <td><%= contatos.matricula %></td>
                   <td><%= contatos.email %></td>
+                  <td><%= contatos.horas %></td> <!--Adicionar no contatos model-->
                   <td><a href="/contato/atividade/<%= contatos._id %>"> Avaliar Atividade</a></td>
                   
                 </tr>
