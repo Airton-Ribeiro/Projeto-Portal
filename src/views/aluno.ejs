@@ -27,17 +27,26 @@
             </div>
             <div class="mb-3">
               <label class="form-label">Curso:</label>
-                <select name="curso">
-                  <option value="<%= aluno.curso %>">ADM</option>
-                  <option value="<%= aluno.curso %>">Redes</option>
-                </select>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="curso" id="cursoADM" value="ADM" <%= aluno.curso === "ADM" ? 'checked' : '' %>>
+                <label class="form-check-label" for="cursoADM">ADM</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="curso" id="cursoRedes" value="Redes" <%= aluno.curso === "Redes" ? 'checked' : '' %>>
+                <label class="form-check-label" for="cursoRedes">Redes</label>
+              </div>
             </div>
+    
             <div class="mb-3">
-              <label class="form-label">Turno:</label>
-              <select name="turno">
-                <option value="A" <% if (aluno.turno === "A") { %>selected<% } %>>A</option>
-                <option value="B" <% if (aluno.turno === "B") { %>selected<% } %>>B</option>
-              </select>
+              <label class="form-label">Turma:</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="turno" id="turnoA" value="A" <%= aluno.turno === "A" ? 'checked' : '' %>>
+                <label class="form-check-label" for="turnoA">A</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="turno" id="turnoB" value="B" <%= aluno.turno === "B" ? 'checked' : '' %>>
+                <label class="form-check-label" for="turnoB">B</label>
+              </div>
             </div>
             <!-- <div class="mb-3">
                 <label class="form-label">Sobrenome</label>
