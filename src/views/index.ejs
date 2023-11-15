@@ -14,9 +14,11 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Sobrenome</th>
+                <!-- <th scope="col">Sobrenome</th> -->
                 <th scope="col">Matrícula</th>
-                <th scope="col">E-mail</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Turno</th>
+                <!-- <th scope="col">E-mail</th> -->
                 <!-- <th scope="col">Data de envio</th> <<< INCLUIR ISSO DEPOIS DE CRIAR O "contato.criadoEm" -->
               </tr>
             </thead>
@@ -27,9 +29,11 @@
               <tr>
                 <td><%= index + numeroInicial %></td>
                 <td><%= contato.nome %></td>
-                <td><%= contato.sobrenome %></td>
+                <!-- <td><%= contato.sobrenome %></td> -->
                 <td><%= contato.matricula %></td>
-                <td><%= contato.email %></td>
+                <td>exemplo curso</td>
+                <td>exemplo turno</td>
+                <!-- <td><%= contato.email %></td> -->
                 <td>
                   <a href="/contato/atividade/<%= contato._id %>">Avaliar Atividade</a>
                 </td>
