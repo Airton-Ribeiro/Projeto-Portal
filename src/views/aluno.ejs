@@ -35,8 +35,8 @@
             <div class="mb-3">
               <label class="form-label">Turno:</label>
               <select name="turno">
-                <option value="A" <%= aluno.turno === "A" ? 'selected' : '' %>>A</option>
-                <option value=""B" <%= aluno.turno === "B" ? 'selected' : '' %>"">B</option>
+                <option value="A" <% if (aluno.turno === "A") { %>selected<% } %>>A</option>
+                <option value="B" <% if (aluno.turno === "B") { %>selected<% } %>>B</option>
               </select>
             </div>
             <!-- <div class="mb-3">
