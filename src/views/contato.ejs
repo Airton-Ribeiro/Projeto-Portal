@@ -5,8 +5,8 @@
         <div class="col-lg-2"></div>
 
         <div class="col-lg-8 my-4">
-          <h1 class="text-center">Contato</h1>
-          <p class="text-center lead">Crie ou edite seu contato abaixo</p>
+          <h1 class="text-center">Cadastro de Alunos</h1>
+          <p class="text-center lead">Crie ou edite um aluno abaixo</p>
 
          <%- include('includes/messages') %>
 
@@ -18,21 +18,29 @@
             <% } %>
             <input type="hidden" name="_csrf" value=<%= csrfToken %>>
             <div class="mb-3">
-              <label class="form-label">Nome</label>
+              <label class="form-label">Nome completo</label>
               <input value="<%= contato.nome %>" type="text" class="form-control" name="nome">
             </div>
             <div class="mb-3">
+              <label class="form-label">Matrícula</label>
+              <input value="<%= contato.matricula %>" type="tel" class="form-control" name="matricula">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Curso</label>
+              <input value="" type="text" class="form-control" name="matricula">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Turno</label>
+              <input value="" type="text" class="form-control" name="matricula">
+            </div>
+            <!-- <div class="mb-3">
                 <label class="form-label">Sobrenome</label>
                 <input value="<%= contato.sobrenome %>" type="text" class="form-control" name="sobrenome">
-              </div>
-              <div class="mb-3">
+              </div> -->
+              <!-- <div class="mb-3">
                 <label class="form-label">Email</label>
                 <input value="<%= contato.email %>" type="email" class="form-control" name="email">
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Matricula</label>
-                <input value="<%= contato.matricula %>" type="tel" class="form-control" name="matricula">
-              </div>
+              </div> -->
             <button type="submit" class="btn btn-primary ">Salvar</button>
           </form>
           
