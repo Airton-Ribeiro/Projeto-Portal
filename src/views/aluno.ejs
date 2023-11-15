@@ -10,36 +10,42 @@
 
          <%- include('includes/messages') %>
 
-
-          <% if(contato._id) { %>
-         <form action="/contato/edit/<%= contato._id %>" method="POST">
+          <!--Mudado onde "aluno" para "aluno"-->
+          <% if(aluno._id) { %>
+         <form action="/aluno/edit/<%= aluno._id %>" method="POST">
           <% } else { %>
-            <form action="/contato/register" method="POST">
+            <form action="/aluno/register" method="POST">
             <% } %>
             <input type="hidden" name="_csrf" value=<%= csrfToken %>>
             <div class="mb-3">
               <label class="form-label">Nome completo</label>
-              <input value="<%= contato.nome %>" type="text" class="form-control" name="nome">
+              <input value="<%= aluno.nome %>" type="text" class="form-control" name="nome">
             </div>
             <div class="mb-3">
               <label class="form-label">Matrícula</label>
-              <input value="<%= contato.matricula %>" type="tel" class="form-control" name="matricula">
+              <input value="<%= aluno.matricula %>" type="text" class="form-control" name="matricula"> 
             </div>
             <div class="mb-3">
-              <label class="form-label">Curso</label>
-              <input value="" type="text" class="form-control" name="matricula">
+              <label class="form-label">Curso:</label>
+                <select name="curso">
+                  <option value="<%= aluno.curso %>">ADM</option>
+                  <option value="<%= aluno.curso %>">Redes</option>
+                </select>
             </div>
             <div class="mb-3">
-              <label class="form-label">Turno</label>
-              <input value="" type="text" class="form-control" name="matricula">
+              <label class="form-label">Turno:</label>
+              <select name="turno">
+                <option value="A" <%= aluno.turno === "A" ? 'selected' : '' %>>A</option>
+                <option value=""B" <%= aluno.turno === "B" ? 'selected' : '' %>"">B</option>
+              </select>
             </div>
             <!-- <div class="mb-3">
                 <label class="form-label">Sobrenome</label>
-                <input value="<%= contato.sobrenome %>" type="text" class="form-control" name="sobrenome">
+                <input value="<%= aluno.sobrenome %>" type="text" class="form-control" name="sobrenome">
               </div> -->
               <!-- <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input value="<%= contato.email %>" type="email" class="form-control" name="email">
+                <input value="<%= aluno.email %>" type="email" class="form-control" name="email">
               </div> -->
             <button type="submit" class="btn btn-primary ">Salvar</button>
           </form>

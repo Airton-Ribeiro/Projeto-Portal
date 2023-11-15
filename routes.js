@@ -3,7 +3,7 @@ const route = express.Router();
 
 const homeController = require("./src/controllers/homeController");
 const loginController = require("./src/controllers/loginController");
-const contatoController = require("./src/controllers/contatoController");
+const alunoController = require("./src/controllers/alunoController");
 
 const { loginRequired } = require("./src/middlewares/middeware");
 
@@ -20,14 +20,14 @@ route.post("/aluno/enviar", loginController.enviar);
 route.post("/aluno/checar", loginController.checar);
 route.post("/login/professor", loginController.loginProfessor);
 route.post("/login/professor/login", loginController.login);
-// Rotas de contato
+// Rotas de aluno
 
-route.get("/contato/index", loginRequired, contatoController.index);
-route.post("/contato/register", loginRequired, contatoController.register);
-route.get("/contato/index/:id", loginRequired, contatoController.editIndex);
-route.post("/contato/edit/:id", loginRequired, contatoController.edit);
-route.get("/contato/delete/:id", loginRequired, contatoController.delete);
-route.get("/contato/login/logout", loginController.logout);
-route.get("/contato/atividade/:id", loginRequired, contatoController.avaliar);
+route.get("/aluno/index", loginRequired, alunoController.index);
+route.post("/aluno/register", loginRequired, alunoController.register);
+route.get("/aluno/index/:id", loginRequired, alunoController.editIndex);
+route.post("/aluno/edit/:id", loginRequired, alunoController.edit);
+route.get("/aluno/delete/:id", loginRequired, alunoController.delete);
+route.get("/aluno/login/logout", loginController.logout);
+route.get("/aluno/atividade/:id", loginRequired, alunoController.avaliar);
 
 module.exports = route;

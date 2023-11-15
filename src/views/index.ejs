@@ -7,7 +7,7 @@
       <h1 class="text-center">Atividades</h1>
       <p class="text-center lead">Atividades para validar</p>
 
-      <%- include('includes/messages') %> <% if (contatos.length > 0) { %>
+      <%- include('includes/messages') %> <% if (alunos.length > 0) { %>
         <div class="responsive-table">
           <table class="table my-3">
             <thead>
@@ -19,23 +19,23 @@
                 <th scope="col">Curso</th>
                 <th scope="col">Turno</th>
                 <!-- <th scope="col">E-mail</th> -->
-                <!-- <th scope="col">Data de envio</th> <<< INCLUIR ISSO DEPOIS DE CRIAR O "contato.criadoEm" -->
+                <!-- <th scope="col">Data de envio</th> <<< INCLUIR ISSO DEPOIS DE CRIAR O "aluno.criadoEm" -->
               </tr>
             </thead>
             <tbody>
               <% const numeroInicial = 1; %> 
-              <% const contatosReverso = contatos.slice().reverse(); %> <!-- ultimo aluno criado vai para o fim da lista -->
-              <% contatosReverso.forEach((contato, index) => { %>
+              <% const alunosReverso = alunos.slice().reverse(); %> <!-- ultimo aluno criado vai para o fim da lista -->
+              <% alunosReverso.forEach((aluno, index) => { %>
               <tr>
                 <td><%= index + numeroInicial %></td>
-                <td><%= contato.nome %></td>
-                <!-- <td><%= contato.sobrenome %></td> -->
-                <td><%= contato.matricula %></td>
-                <td>exemplo curso</td>
-                <td>exemplo turno</td>
-                <!-- <td><%= contato.email %></td> -->
+                <td><%= aluno.nome %></td>
+                <!-- <td><%= aluno.sobrenome %></td> -->
+                <td><%= aluno.matricula %></td>
+                <td><%= aluno.curso %></td>
+                <td><%= aluno.turno %></td>
+                <!-- <td><%= aluno.email %></td> -->
                 <td>
-                  <a href="/contato/atividade/<%= contato._id %>">Avaliar Atividade</a>
+                  <a href="/aluno/atividade/<%= aluno._id %>">Avaliar Atividade</a>
                 </td>
               </tr>
               <% }); %>

@@ -9,23 +9,23 @@
           <p class="text-center lead">Avalie a atividade abaixo</p>
 
          <%- include('includes/messages') %>
-         <% if(contato._id) { %>
-          <form action="/contato/atividade/<%= contato._id %>" method="POST">
+         <% if(aluno._id) { %>
+          <form action="/aluno/atividade/<%= aluno._id %>" method="POST">
            <% } else { %>
-             <form action="/contato/register" method="POST">
+             <form action="/aluno/register" method="POST">
              <% } %>
              <input type="hidden" name="_csrf" value=<%= csrfToken %>>
              <div class="mb-3">
-            <p>Nome: <%= contato.nome %> <%= contato.sobrenome %></p>
+            <p>Nome: <%= aluno.nome %> <%= aluno.sobrenome %></p>
           </div>
           <div class="mb-3">
-            <p>Email: <%= contato.email %></p>
+            <p>Email: <%= aluno.email %></p>
           </div>
           <div class="mb-2">
-            <p>Matricula: <%= contato.matricula %></p>
+            <p>Matricula: <%= aluno.matricula %></p>
           </div>
           <div class="mb-2">
-            <p>Descrição: <%= contato.descricao %></p>
+            <p>Descrição: <%= aluno.descricao %></p>
           </div>
           <button type="submit" class="btn btn-success">Aceitar</button>
           <button type="submit" class="btn btn-danger">Invalidar</button>
