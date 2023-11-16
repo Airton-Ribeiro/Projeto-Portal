@@ -77,10 +77,4 @@ exports.avaliar = async (req, res) => {
   res.render('atividade', { aluno });
 };
 
-// exports.alunos = async (req, res) => {
-//   if (!req.params.id) return res.render('404');
-//   const aluno = await Aluno.buscaPorId(req.params.id);
-//   if (!aluno) return res.render('404');
-//   res.render('aluno', { aluno });
-// };
 

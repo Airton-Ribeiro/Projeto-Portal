@@ -1,5 +1,3 @@
-login.init();
-cadastro.init();
 import './assets/images/logo.png'
-
+import './assets/css/style.css'
 
