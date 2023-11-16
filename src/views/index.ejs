@@ -4,20 +4,21 @@
     <div class="col-lg-2"></div>
 
     <div class="col-lg-8 my-4">
-      <h1 class="text-center">Atividades</h1>
-      <p class="text-center lead">Atividades para validar</p>
+      <h1 class="text-center" id="titulo-index">Atividades</h1>
+      <p class="text-center lead" id="texto-index">Atividades para validar</p>
 
       <%- include('includes/messages') %> <% if (alunos.length > 0) { %>
-        <div class="responsive-table">
-          <table class="table my-3">
+        <div class="responsive-table shadow-sm p-3 mb-5 bg-white rounded">
+          <table class="table table-borderless table-light  border-primary" id="tabela-index">
             <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nome</th>
+              <tr class="table-primary">
+                <th scope="col" id="th-index" class="th-index-class">#</th>
+                <th scope="col" id="th-index" class="th-index-class">Nome</th>
                 <!-- <th scope="col">Sobrenome</th> -->
-                <th scope="col">Matrícula</th>
-                <th scope="col">Curso</th>
-                <th scope="col">Turno</th>
+                <th scope="col" id="th-index" class="th-index-class">Matrícula</th>
+                <th scope="col" id="th-index" class="th-index-class">Curso</th>
+                <th scope="col" id="th-index" class="th-index-class">Turno</th>
+                <th scope="col" id="th-index" class="th-index-class">Ações</th>
                 <!-- <th scope="col">E-mail</th> -->
                 <!-- <th scope="col">Data de envio</th> <<< INCLUIR ISSO DEPOIS DE CRIAR O "aluno.criadoEm" -->
               </tr>
@@ -26,16 +27,16 @@
               <% const numeroInicial = 1; %> 
               <% const alunosReverso = alunos.slice().reverse(); %> <!-- ultimo aluno criado vai para o fim da lista -->
               <% alunosReverso.forEach((aluno, index) => { %>
-              <tr>
-                <td><%= index + numeroInicial %></td>
-                <td><%= aluno.nome %></td>
+              <tr class="tr-index">
+                <td id="td-index"><%= index + numeroInicial %></td>
+                <td id="td-index"><%= aluno.nome %></td>
                 <!-- <td><%= aluno.sobrenome %></td> -->
-                <td><%= aluno.matricula %></td>
-                <td><%= aluno.curso %></td>
-                <td><%= aluno.turno %></td>
+                <td id="td-index"><%= aluno.matricula %></td>
+                <td id="td-index"><%= aluno.curso %></td>
+                <td id="td-index"><%= aluno.turno %></td>
                 <!-- <td><%= aluno.email %></td> -->
                 <td>
-                  <a href="/aluno/atividade/<%= aluno._id %>">Avaliar Atividade</a>
+                  <a class="a-index" href="/aluno/atividade/<%= aluno._id %>">Avaliar Atividade</a>
                 </td>
               </tr>
               <% }); %>
