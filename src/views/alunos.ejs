@@ -1,4 +1,6 @@
-<%- include('includes/head')%> <%- include('includes/nav')%>
+<%- include('includes/head')%>
+<%- include('includes/nav')%>
+
 <div class="container">
   <div class="row">
     <div class="col-lg-2"></div>
@@ -6,49 +8,49 @@
     <div class="col-lg-8 my-4">
       <h1 class="text-center" id="titulo-index">Alunos</h1>
       <p class="text-center lead" id="texto-index">Lista de alunos cadastrados</p>
+      
+      <%- include('includes/messages') %> 
 
-      <%- include('includes/messages') %> <% if (alunos.length > 0) { %>
+      <% if (alunos.length > 0) { %>
         <div class="responsive-table shadow-sm p-3 mb-5 bg-white rounded">
-          <table class="table table-borderless table-light  border-primary" id="tabela-index">
-            <thead>
-              <tr class="table-primary">
-                <th scope="col" id="th-index" class="th-index-class">#</th>
-                <th scope="col" id="th-index" class="th-index-class">Nome</th>
-                <!-- <th scope="col">Sobrenome</th> -->
-                <th scope="col" id="th-index" class="th-index-class">Matrícula</th>
-                <th scope="col" id="th-index" class="th-index-class">Curso</th>
-                <th scope="col" id="th-index" class="th-index-class">Turma</th>
-                <th scope="col" id="th-index" class="th-index-class">Edit</th>
-                <th scope="col" id="th-index" class="th-index-class">Delete</th>
-                <!-- <th scope="col">E-mail</th> -->
-                <!-- <th scope="col">Data de envio</th> <<< INCLUIR ISSO DEPOIS DE CRIAR O "aluno.criadoEm" -->
+          <table class="table table-borderless table-light  border-primary table-striped">
+            <thead class="table-primary bg-primary">
+              <tr class=" text-white">
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Matrícula</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Turno</th>
+                <th scope="col">Ações</th>
               </tr>
             </thead>
+
             <tbody>
               <% const numeroInicial = 1; %> 
-              <% const alunosReverso = alunos.slice().reverse(); %> <!-- ultimo aluno criado vai para o fim da lista -->
+              <% const alunosReverso = alunos.slice().reverse(); %>
               <% alunosReverso.forEach((aluno, index) => { %>
                 <tr>
-                    <td><%= aluno.nome %></td>
-                    <td><%= aluno.sobrenome %></td>
-                    <td><%= aluno.matricula %></td>
-                    <td><%= aluno.curso %></td>
-                    <td><%= aluno.turno %></td>
-                    <td><a href="/aluno/index/<%= aluno._id %>"> Editar</a></td>
-                    <td><a class="text-danger" href="/aluno/delete/<%= aluno._id %>"> Excluir</a></td>
-                  </tr>
+                  <td><%= index + numeroInicial %></td>
+                  <td><%= aluno.nome %> <%= aluno.sobrenome %></td>
+                  <td><%= aluno.matricula %></td>
+                  <td><%= aluno.curso %></td>
+                  <td class="text-center"><%= aluno.turno %></td>
+                  <td>
+                    <a href="/aluno/index/<%= aluno._id %>">Editar</a>
+                    <a class="text-danger" href="/aluno/delete/<%= aluno._id %>">Excluir</a>
+                  </td>
+                </tr>
               <% }); %>
             </tbody>
           </table>
         </div>
       <% } else { %>
-        <p class="text-center lead">Não existem atividades a serem avaliadas.</p>
+        <p class="text-center lead">Não existem alunos cadastrados.</p>
       <% } %>
-      </div>
-      
+    </div>
 
     <div class="col-lg-2"></div>
   </div>
 </div>
-<%- include('includes/footer')%>
 
+<%- include('includes/footer')%>

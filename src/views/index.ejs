@@ -9,36 +9,37 @@
 
       <%- include('includes/messages') %> <% if (alunos.length > 0) { %>
         <div class="responsive-table shadow-sm p-3 mb-5 bg-white rounded">
-          <table class="table table-borderless table-light  border-primary table-striped" id="tabela-index">
+          <table class="table table-borderless table-light  border-primary table-striped">
             <thead>
-              <tr class="table-primary">
-                <th scope="col" id="th-index" class="th-index-class text-white bg-primary">#</th>
-                <th scope="col" id="th-index" class="th-index-class text-white bg-primary">Nome</th>
+              <tr class="table-primary text-white">
+                <th scope="col" class="bg-primary">#</th>
+                <th scope="col" class="bg-primary">Nome</th>
                 <!-- <th scope="col">Sobrenome</th> -->
-                <th scope="col" id="th-index" class="th-index-class text-white bg-primary">Matrícula</th>
-                <th scope="col" id="th-index" class="th-index-class text-white bg-primary">Curso</th>
-                <th scope="col" id="th-index" class="th-index-class text-white bg-primary">Turno</th>
-                <th scope="col" id="th-index" class="th-index-class text-white bg-primary">Ações</th>
+                <th scope="col" class="bg-primary">Matrícula</th>
+                <th scope="col" class="bg-primary">Curso</th>
+                <th scope="col" class="bg-primary">Turno</th>
+                <th scope="col" class="bg-primary">Ações</th>
                 <!-- <th scope="col">E-mail</th> -->
                 <!-- <th scope="col">Data de envio</th> <<< INCLUIR ISSO DEPOIS DE CRIAR O "aluno.criadoEm" -->
               </tr>
             </thead>
+
             <tbody>
               <% const numeroInicial = 1; %> 
               <% const alunosReverso = alunos.slice().reverse(); %> <!-- ultimo aluno criado vai para o fim da lista -->
               <% alunosReverso.forEach((aluno, index) => { %>
-              <tr class="tr-index">
-                <td id="td-index"><%= index + numeroInicial %></td>
-                <td id="td-index"><%= aluno.nome %></td>
-                <!-- <td><%= aluno.sobrenome %></td> -->
-                <td id="td-index"><%= aluno.matricula %></td>
-                <td id="td-index"><%= aluno.curso %></td>
-                <td id="td-index"><%= aluno.turno %></td>
-                <!-- <td><%= aluno.email %></td> -->
-                <td>
-                  <a class="a-index" href="/aluno/atividade/<%= aluno._id %>">Avaliar Atividade</a>
-                </td>
-              </tr>
+                <tr class="tr-index">
+                      <td id="td-index"><%= index + numeroInicial %></td>
+                      <td id="td-index"><%= aluno.nome %></td>
+                      <!-- <td><%= aluno.sobrenome %></td> -->
+                      <td id="td-index"><%= aluno.matricula %></td>
+                      <td id="td-index"><%= aluno.curso %></td>
+                      <td id="td-index" class="text-center"><%= aluno.turno %></td>
+                      <!-- <td><%= aluno.email %></td> -->
+                      <td>
+                        <a class="a-index" href="/aluno/atividade/<%= aluno._id %>">Avaliar Atividade</a>
+                      </td>
+                </tr>
               <% }); %>
             </tbody>
           </table>
