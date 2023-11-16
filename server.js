@@ -26,6 +26,7 @@ const {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "public")));
+app.use("/frontend", express.static(path.join(__dirname, "frontend")));
 
 const sessionOptions = session({
   secret: "aspodasdpokapodkaspdok qwsdasd qwew easd easd a7()",

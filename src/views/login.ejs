@@ -3,6 +3,7 @@
   <div class="shadow p-4">
     <div class="row">
       <div class="col-lg-8 my-3 mx-auto">
+        <img src="/frontend//assets/images/logo.png" width="250" height="230">
         <h1 class="text-center">At.com</h1>
         <p class="text-center lead">Portal de envio de atividades complementares</p>
         <%- include('includes/messages') %>
@@ -10,7 +11,7 @@
           <!-- Area do aluno -->
           <div class="col-lg">
             <h4>Envie suas atividades</h4>
-            <p>Área do aluno</p>
+            <p class="text-center">Área do aluno</p>
             <div class="mb-3 d-flex flex-column">
               <form class="mb-3" action="/aluno/enviar" method="POST">
                 <button type="submit" class="btn btn-primary btn-block">Enviar Atividade</button>
@@ -26,7 +27,7 @@
         </div>
         <div class="col-lg alignt justify-content-center ">
           <form action="/login/professor" method="POST">
-            <button type="submit" class="btn btn-link btn-block text-left">logar como professor</button>
+            <button type="submit" class="btn btn-link btn-block text-center">→Logar como professor← </button>
           </form>
         </div>
       </div>

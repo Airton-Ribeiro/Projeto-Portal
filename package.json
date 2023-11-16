@@ -5,7 +5,7 @@
   "main": "routes.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js --ignore publig --ignore frontend",
+    "start": "nodemon server.js --ignore public --ignore frontend",
     "dev": "webpack -w"
   },
   "keywords": [],
@@ -34,6 +34,7 @@
     "@babel/core": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
     "babel-loader": "^9.1.2",
+    "file-loader": "^6.2.0",
     "nodemon": "^3.0.1",
     "webpack": "^5.78.0",
     "webpack-cli": "^5.0.1"

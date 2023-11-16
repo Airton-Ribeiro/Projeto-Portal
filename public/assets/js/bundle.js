@@ -1,2 +1,2 @@
-login.init(),cadastro.init();
+(()=>{"use strict";var t={};t.g=function(){if("object"==typeof globalThis)return globalThis;try{return this||new Function("return this")()}catch(t){if("object"==typeof window)return window}}(),(()=>{var r;t.g.importScripts&&(r=t.g.location+"");var i=t.g.document;if(!r&&i&&(i.currentScript&&(r=i.currentScript.src),!r)){var e=i.getElementsByTagName("script");if(e.length)for(var n=e.length-1;n>-1&&!r;)r=e[n--].src}if(!r)throw new Error("Automatic publicPath is not supported in this browser");r=r.replace(/#.*$/,"").replace(/\?.*$/,"").replace(/\/[^\/]+$/,"/"),t.p=r})(),t.p,login.init(),cadastro.init()})();
 //# sourceMappingURL=bundle.js.map
