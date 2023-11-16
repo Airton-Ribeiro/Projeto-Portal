@@ -20,6 +20,7 @@ route.post("/aluno/enviar", loginController.enviar);
 route.post("/aluno/checar", loginController.checar);
 route.post("/login/professor", loginController.loginProfessor);
 route.post("/login/professor/login", loginController.login);
+route.get("/aluno/index/login/logout", loginController.logout)
 // Rotas de aluno
 
 route.get("/aluno/index", loginRequired, alunoController.index);
