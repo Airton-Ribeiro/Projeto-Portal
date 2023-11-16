@@ -1,40 +1,37 @@
 <%- include('includes/head')%>
-    <div class="container bg-light ">
-      <div class="row">
-        <div class="col-lg-8 my-3 mx-auto">
-          <h1 class="text-center">At.com</h1>
-          <p class="text-center lead">Portal de envio de atividades complementares</p>
-          <%- include('includes/messages') %>
-          <div class="row ">
-            <!-- Area do aluno -->
-            <div class="col-lg">
-              <h4>Envie suas atividades</h4>
-              <p>Area do aluno</p>
-              <form class="" action="/aluno/enviar" method="POST">
-                <div class="mb-3">
-                  <button type="submit" class="btn btn-primary">Enviar Atividade</button>
-                </div>
+<div class="container-fluid vh-100 d-flex align-items-center justify-content-center">
+  <div class="shadow p-4">
+    <div class="row">
+      <div class="col-lg-8 my-3 mx-auto">
+        <h1 class="text-center">At.com</h1>
+        <p class="text-center lead">Portal de envio de atividades complementares</p>
+        <%- include('includes/messages') %>
+        <div class="row">
+          <!-- Area do aluno -->
+          <div class="col-lg">
+            <h4>Envie suas atividades</h4>
+            <p>Área do aluno</p>
+            <div class="mb-3 d-flex flex-column">
+              <form class="mb-3" action="/aluno/enviar" method="POST">
+                <button type="submit" class="btn btn-primary btn-block">Enviar Atividade</button>
               </form>
-              <div class="vr"></div>
-              <form class="" action="/aluno/checar" method="POST">
-                <div class="mb-3">
-                  <button type="submit" class="btn btn-primary">Checar Atividades Enviadas</button>
-                </div>
-              </form>
-            </div>
-            <!-- Area do professor -->
-            <div class="col-lg">
-              <h4>Login como professor</h4>
-              <p>Area do gestor</p>
-              <form class="" action="/login/professor" method="POST">
-                <div class="mb-3">
-                  <button type="submit" class="btn btn-primary">Faça login como professor</button>
-                </div>
+              <div class="vr my-3"></div> <!-- Linha vertical -->
+              <form class="mb-3" action="/aluno/checar" method="POST">
+                <button type="submit" class="btn btn-primary btn-block">Checar Atividades</button>
               </form>
             </div>
           </div>
+          <!-- Area do professor -->
+          
+        </div>
+        <div class="col-lg alignt justify-content-center ">
+          <form action="/login/professor" method="POST">
+            <button type="submit" class="btn btn-link btn-block text-left">logar como professor</button>
+          </form>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
 <%- include('includes/footer')%>

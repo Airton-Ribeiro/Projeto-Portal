@@ -4,21 +4,21 @@
     <div class="col-lg-2"></div>
 
     <div class="col-lg-8 my-4">
-      <h1 class="text-center" id="titulo-index">Atividades</h1>
+      <h1 class="text-center text-primary" id="titulo-index ">Atividades</h1>
       <p class="text-center lead" id="texto-index">Atividades para validar</p>
 
       <%- include('includes/messages') %> <% if (alunos.length > 0) { %>
         <div class="responsive-table shadow-sm p-3 mb-5 bg-white rounded">
-          <table class="table table-borderless table-light  border-primary" id="tabela-index">
+          <table class="table table-borderless table-light  border-primary table-striped" id="tabela-index">
             <thead>
               <tr class="table-primary">
-                <th scope="col" id="th-index" class="th-index-class">#</th>
-                <th scope="col" id="th-index" class="th-index-class">Nome</th>
+                <th scope="col" id="th-index" class="th-index-class text-white bg-primary">#</th>
+                <th scope="col" id="th-index" class="th-index-class text-white bg-primary">Nome</th>
                 <!-- <th scope="col">Sobrenome</th> -->
-                <th scope="col" id="th-index" class="th-index-class">Matrícula</th>
-                <th scope="col" id="th-index" class="th-index-class">Curso</th>
-                <th scope="col" id="th-index" class="th-index-class">Turno</th>
-                <th scope="col" id="th-index" class="th-index-class">Ações</th>
+                <th scope="col" id="th-index" class="th-index-class text-white bg-primary">Matrícula</th>
+                <th scope="col" id="th-index" class="th-index-class text-white bg-primary">Curso</th>
+                <th scope="col" id="th-index" class="th-index-class text-white bg-primary">Turno</th>
+                <th scope="col" id="th-index" class="th-index-class text-white bg-primary">Ações</th>
                 <!-- <th scope="col">E-mail</th> -->
                 <!-- <th scope="col">Data de envio</th> <<< INCLUIR ISSO DEPOIS DE CRIAR O "aluno.criadoEm" -->
               </tr>
