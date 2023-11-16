@@ -30,5 +30,9 @@ route.post("/aluno/edit/:id", loginRequired, alunoController.edit);
 route.get("/aluno/delete/:id", loginRequired, alunoController.delete);
 route.get("/aluno/login/logout", loginController.logout);
 route.get("/aluno/atividade/:id", loginRequired, alunoController.avaliar);
+route.get("/alunos/index", loginRequired, homeController.alunos);
+route.get("/alunos/login/logout", loginController.logout);
+
+
 
 module.exports = route;
