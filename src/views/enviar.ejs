@@ -1,40 +1,60 @@
 <%- include('includes/head')%>
 <div class="container">
-  <div class="row d-flex justify-content-center align-items-center">
+  <div class="row justify-content-center align-items-center vh-100">
     <div class="col-lg-8 my-4">
       <h1 class="text-center">Faça o envio da atividade abaixo</h1>
-      <form action="">
-        <div>
-          <label class="form-label">Nome</label>
-          <input value="" type="text" class="form-control" name="nome" />
+
+      <form action="" class="row shadow" style="height: 50vh">
+        <div class="col-lg-6">
+          <div class="d-flex flex-column mx-auto">
+            <div class="mb-3">
+              <label for="nome" class="form-label">Nome</label>
+              <input id="nome" type="text" class="form-control" name="nome" required />
+            </div>
+            <div class="mb-3">
+              <label for="matricula" class="form-label">Matrícula</label>
+              <input id="matricula" type="tel" class="form-control" name="matricula" required />
+            </div>
+            <div class="mb-3">
+              <label for="horas">Horas</label>
+              <input type="range" class="form-control-range" id="formControlRange" min="1" max="24" step="1" value="1">
+              <output id="horaOutput">1</output>
+            </div>
+
+            <div class="mb-3">
+              <label for="anexo" class="form-label">Anexo</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="anexo" name="anexo" required />
+                  <label class="custom-file-label" for="anexo" data-browse="Anexar">Escolher arquivo</label>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- <div class="mb-3">
-          <label class="form-label">Sobrenome</label>
-          <input value="" type="text" class="form-control" name="sobrenome" />
-        </div> -->
-        <!-- <div class="mb-3">
-          <label class="form-label">Email</label>
-          <input value="" type="email" class="form-control" name="email" />
-        </div> -->
-        <div class="mb-3">
-          <label class="form-label">Matrícula</label>
-          <input value="" type="tel" class="form-control" name="matricula" />
+
+        <div class="col-lg-6">
+          <div class="d-flex flex-column mx-auto">
+            <div class="mb-3">
+              <label for="descricao" class="form-label">Descrição da atividade</label>
+              <textarea id="descricao" class="form-control" rows="12" name="descricao" style="resize: none;" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
         </div>
-        <div class="mb-3">
-          <label class="form-label">Descrição da atividade</label>
-          <input value="" type="text" class="form-control" name="descricao" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Horas</label>
-          <input value="" type="text" class="form-control" name="horas" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Anexo</label>
-          <input value="" type="file" class="form-control" name="anexo" />
-        </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
       </form>
     </div>
   </div>
 </div>
+
+<script>
+  const horasInput = document.getElementById('formControlRange');
+  const horasOutput = document.getElementById('horaOutput');
+
+  horasInput.addEventListener('input', function () {
+    horasOutput.textContent = horasInput.value;
+  });
+</script>
+
 <%- include('includes/footer')%>
