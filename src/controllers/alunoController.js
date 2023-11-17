@@ -6,6 +6,7 @@ exports.index = (req, res) => {
   });
 };
 
+
 exports.register = async (req, res) => {
   try {
     const aluno = new Aluno(req.body);

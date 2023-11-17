@@ -16,13 +16,14 @@ route.get("/login/index", loginController.index);
 route.post("/login/login", loginController.login);
 route.get("/login/logout", loginController.logout);
 route.get("/login/login/logout", loginController.logout);
-route.post("/aluno/enviar", loginController.enviar);
-route.post("/aluno/checar", loginController.checar);
 route.post("/login/professor", loginController.loginProfessor);
 route.post("/login/professor/login", loginController.login);
 route.get("/aluno/index/login/logout", loginController.logout)
-// Rotas de aluno
 
+
+// Rotas de aluno
+route.post("/aluno/checar", loginController.checar);
+route.post("/aluno/enviar", loginController.enviar);
 route.get("/aluno/index", loginRequired, alunoController.index);
 route.post("/aluno/register", loginRequired, alunoController.register);
 route.get("/aluno/index/:id", loginRequired, alunoController.editIndex);
@@ -32,6 +33,7 @@ route.get("/aluno/login/logout", loginController.logout);
 route.get("/aluno/atividade/:id", loginRequired, alunoController.avaliar);
 route.get("/alunos/index", loginRequired, homeController.alunos);
 route.get("/alunos/login/logout", loginController.logout);
+route.post("/aluno/enviar",)
 
 
 

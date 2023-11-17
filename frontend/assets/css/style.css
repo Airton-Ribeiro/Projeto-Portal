@@ -47,8 +47,9 @@
     text-decoration: underline;
   } */
   #bg-image {
-    background-image:url(https://newmibridges.michigan.gov/resource/1690024283000/ISD_Icons/landing-page/group-3.svg);
+    background-image:url(https://github.com/Astro-Dust/background/blob/main/background-projeto1.png?raw=true);
     background-size: cover;
+    
     /* Substitua 'url('caminho/da/imagem.jpg')' pelo caminho real da sua imagem */
     /* background-image: url('/frontend/assets/images/background.png'); */
     /* Ajuste a propriedade background-size conforme necessário */
