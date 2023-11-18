@@ -1,46 +1,48 @@
 <%- include('includes/head')%>
-<div class="container ";>
-  <div class="row justify-content-center align-items-center vh-100">
-    <div class="col-lg-8 my-4"style="background-color: white;">
-      <h1 class="text-center">Faça o envio da atividade abaixo</h1>
+<div id="bg-image">
+  <div class="container">
+    <div class="row justify-content-center align-items-center vh-100">
+      <div class="col-lg-8 my-4" style="background-color: white; border-radius: 5px;">
 
-      <form action="" class="row shadow p-3" style="background-color: white;" >
-        <div class="col-lg-6 mb-3">
-          <div class="d-flex flex-column">
-            <label for="nome" class="form-label">Nome</label>
-            <input id="nome" type="text" class="form-control" name="nome" required />
-          </div>
-          <div class="d-flex flex-column mt-3">
-            <label for="matricula" class="form-label">Matrícula</label>
-            <input id="matricula" type="tel" class="form-control" name="matricula" required />
-          </div>
-          <div class="d-flex flex-column mt-3">
-            <label for="horas">Horas</label>
-            <input type="range" class="form-control-range" id="formControlRange" min="1" max="24" step="1" value="1">
-            <output id="horaOutput">1</output>
-          </div>
-          <div class="d-flex flex-column mt-0">
-            <label for="anexo" class="form-label"></label>
-            <div class="input-group">
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="anexo" name="anexo" required />
-                <label class="custom-file-label" for="anexo" data-browse="Anexar">Escolher arquivo</label>
+        <form action="" class="row shadow p-3 rounded " style=" background-color: white; box-shadow: 1px 1px 5px rgb(255, 0, 0);">
+          <h3 class="text-center mb-4 mx-auto">Faça o envio da atividade abaixo</h3>
+          <div class="col-lg-6 mb-3">
+            <div class="d-flex flex-column">
+              <label for="nome" class="form-label">Nome</label>
+              <input id="nome" type="text" class="form-control" name="nome" required />
+            </div>
+            <div class="d-flex flex-column mt-3">
+              <label for="matricula" class="form-label">Matrícula</label>
+              <input id="matricula" type="tel" class="form-control" name="matricula" required />
+            </div>
+            <div class="d-flex flex-column mt-3">
+              <label for="horas">Horas</label>
+              <input type="range" class="form-control-range" id="formControlRange" min="1" max="24" step="1" value="1">
+              <output id="horaOutput">1</output>
+            </div>
+            <div class="d-flex flex-column mt-0">
+              <label for="anexo" class="form-label"></label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="anexo" name="anexo" required />
+                  <label class="custom-file-label" for="anexo" data-browse="Anexar">Escolher arquivo</label>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-lg-6 mb-3">
-          <div class="d-flex flex-column">
-            <label for="descricao" class="form-label">Descrição da atividade</label>
-            <textarea id="descricao" class="form-control" rows="8" name="descricao" style="resize: none;" required></textarea>
-          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="d-flex flex-column">
+              <label for="descricao" class="form-label">Descrição da atividade</label>
+              <textarea id="descricao" class="form-control" rows="8" name="descricao" style="resize: none;" required></textarea>
+            </div>
 
-          <div class="mt-2">
-            <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+            <div class="mt-2">
+              <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </div>
