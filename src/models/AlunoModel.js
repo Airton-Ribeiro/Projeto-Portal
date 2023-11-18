@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
+const AtividadeSchema = new mongoose.Schema({
+  nomeAtt: { type: String, required: false, default: '' },
+  descricao: { type: String, required: false, default: '' },
+  horas: { type: Number, required: false, default: '0' },
+});
+
+
 const AlunoSchema = new mongoose.Schema({
   nome: { type: String, required: true },
   email: { type: String, required: false, default: '' },
@@ -8,7 +15,7 @@ const AlunoSchema = new mongoose.Schema({
   curso: { type: String, required: true, default: '' },
   turno: { type: String, required: true, default: '' },
   criadoEm: { type: Date, default: Date.now },
-  descricao: { type: String, required: false, default: '' }
+  atividades: [AtividadeSchema],
 });
 
 const AlunoModel = mongoose.model('Aluno', AlunoSchema);
@@ -54,6 +61,7 @@ class Aluno {
       email: this.body.email,
       matricula: this.body.matricula,
       turno: this.body.turno,
+      horas: this.body.horas,
     }
   }
   async alunoExists() {

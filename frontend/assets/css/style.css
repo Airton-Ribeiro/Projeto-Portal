@@ -47,7 +47,7 @@
     text-decoration: underline;
   } */
   #bg-image {
-    background-image:url(https://github.com/Astro-Dust/background/blob/main/background-projeto1.png?raw=true);
+    background-image:url(https://raw.githubusercontent.com/Astro-Dust/background/main/background-projeto2.svg);
     background-size: cover;
     
     /* Substitua 'url('caminho/da/imagem.jpg')' pelo caminho real da sua imagem */
