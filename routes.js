@@ -18,7 +18,8 @@ route.get("/login/logout", loginController.logout);
 route.get("/login/login/logout", loginController.logout);
 route.post("/login/professor", loginController.loginProfessor);
 route.post("/login/professor/login", loginController.login);
-route.get("/aluno/index/login/logout", loginController.logout)
+route.get("/aluno/index/login/logout", loginController.logout);
+route.get("/aluno/atividade/login/logout", loginRequired, loginController.logout);
 
 
 // Rotas de aluno
