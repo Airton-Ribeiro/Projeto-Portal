@@ -11,6 +11,7 @@ const AtividadeSchema = new mongoose.Schema({
     nome: { type: String, required: false, default: '' },
     dados: Buffer,
   },
+  status: { type: String, required: false, default: 'Avaliando...' },
   criadoEm: { type: Date, default: Date.now },
 });
 
@@ -112,23 +113,33 @@ class Aluno {
 
 
   //Upload de arquivos CHECAR
-
   async uploadFile(req, res) {
-    const storage = multer.memoryStorage();//Salvando  buffer na memória
-    const upload = multer({ storage: storage })//Onde salvar o arquivo (não entendi o storage:storage também :p)
 
-    upload.single('anexo'), async (req, res) => { //pegando o upload direto da tela envio, onde o campo de file se chama "anexo"
+    const uploadMiddleware = upload.single('anexo');
+
+    uploadMiddleware(req, res, async (err) => {
+      if (err) {
+        return res.status(500).send(err.message);
+      }
+
       try {
         const anexo = new File({
-          name: req.anexo.nome,
-          data: req.anexo.dados
-        })
+          name: req.file.originalname,
+          data: req.file.buffer,
+        });
+
         await anexo.save();
-        res.send('Arquivo aberto')
+        res.send('Arquivo salvo no banco de dados');
       } catch (err) {
-        res.status(500).send(err.message)
+        res.status(500).send(err.message);
       }
-    }
+
+      req.flash('success', 'Atividade enviada com sucesso.');
+      req.session.save(function () {
+        return res.redirect('/login/index');
+      });
+
+    });
   }
 }
 

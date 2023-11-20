@@ -33,3 +33,10 @@ exports.loginRequired = (req, res, next) => {
     }
     next();
 }
+
+
+exports.upload = (req, res, next) => {
+    const storage = multer.memoryStorage()
+    const upload = multer({ storage: storage })
+    next();
+}
