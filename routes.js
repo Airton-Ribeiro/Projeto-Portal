@@ -25,6 +25,7 @@ route.get("/aluno/atividade/login/logout", loginRequired, loginController.logout
 // Rotas de aluno
 route.post("/aluno/checar", loginController.checar);
 route.post("/aluno/enviar", loginController.enviar);
+route.post("/aluno/enviar/att", alunoController.uploadFile) //tentativa de controller para download (loop infinito no envio de att)
 route.get("/aluno/index", loginRequired, alunoController.index);
 route.post("/aluno/register", loginRequired, alunoController.register);
 route.get("/aluno/index/:id", loginRequired, alunoController.editIndex);
@@ -34,7 +35,6 @@ route.get("/aluno/login/logout", loginController.logout);
 route.get("/aluno/atividade/:id", loginRequired, alunoController.avaliar);
 route.get("/alunos/index", loginRequired, homeController.alunos);
 route.get("/alunos/login/logout", loginController.logout);
-route.post("/aluno/enviar",)
 
 
 

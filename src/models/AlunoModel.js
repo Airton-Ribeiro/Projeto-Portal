@@ -1,10 +1,17 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const multer = require('multer');
+const { cache } = require('ejs');
 
 const AtividadeSchema = new mongoose.Schema({
   nomeAtt: { type: String, required: false, default: '' },
   descricao: { type: String, required: false, default: '' },
   horas: { type: Number, required: false, default: '0' },
+  anexo: {
+    nome: { type: String, required: false, default: '' },
+    dados: Buffer,
+  },
+  criadoEm: { type: Date, default: Date.now },
 });
 
 
@@ -83,6 +90,8 @@ class Aluno {
     if (this.errors.length > 0) return;
     this.aluno = await AlunoModel.findByIdAndUpdate(id, this.body, { new: true });
   }
+
+
   // Métodos Estáticos.
   static async buscaPorId(id) {
     if (typeof id !== 'string') return;
@@ -101,8 +110,27 @@ class Aluno {
     return aluno;
   }
 
-}
 
+  //Upload de arquivos CHECAR
+
+  async uploadFile(req, res) {
+    const storage = multer.memoryStorage();//Salvando  buffer na memória
+    const upload = multer({ storage: storage })//Onde salvar o arquivo (não entendi o storage:storage também :p)
+
+    upload.single('anexo'), async (req, res) => { //pegando o upload direto da tela envio, onde o campo de file se chama "anexo"
+      try {
+        const anexo = new File({
+          name: req.anexo.nome,
+          data: req.anexo.dados
+        })
+        await anexo.save();
+        res.send('Arquivo aberto')
+      } catch (err) {
+        res.status(500).send(err.message)
+      }
+    }
+  }
+}
 
 
 module.exports = Aluno;

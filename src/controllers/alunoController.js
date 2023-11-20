@@ -79,3 +79,8 @@ exports.avaliar = async (req, res) => {
 };
 
 
+//Tentativa de download de arquivo CTRL+click no "uploadFile" de baixo pra ir para a função no AlunoModel
+exports.uploadFile = async (req, res) => {
+  const aluno = new Aluno(req.body);
+  await aluno.uploadFile(req, res);
+}
