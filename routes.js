@@ -21,6 +21,8 @@ route.post("/login/professor/login", loginController.login);
 route.get("/aluno/index/login/logout", loginController.logout);
 route.get("/aluno/atividade/login/logout", loginRequired, loginController.logout);
 
+// Rotas de aluno
+route.post('/aluno/enviar')
 
 // Rotas de aluno
 route.post("/aluno/checar", loginController.checar);
