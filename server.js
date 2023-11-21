@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const multer = require("multer");
 mongoose
   .connect(process.env.CONNECTIONSTRING)
   .then(() => {
@@ -13,7 +12,6 @@ mongoose
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
-
 const routes = require("./routes");
 const path = require("path");
 const csrf = require("csurf");
@@ -23,12 +21,10 @@ const {
   csrfMiddleware,
 } = require("./src/middlewares/middeware");
 
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "public")));
 app.use("/frontend", express.static(path.join(__dirname, "frontend")));
-
 const sessionOptions = session({
   secret: "aspodasdpokapodkaspdok qwsdasd qwew easd easd a7()",
   resave: false,

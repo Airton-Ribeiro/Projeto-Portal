@@ -4,6 +4,8 @@ const route = express.Router();
 const homeController = require("./src/controllers/homeController");
 const loginController = require("./src/controllers/loginController");
 const alunoController = require("./src/controllers/alunoController");
+const multer = require("multer");
+const upload = multer();
 
 const { loginRequired } = require("./src/middlewares/middeware");
 
@@ -23,9 +25,10 @@ route.get("/aluno/atividade/login/logout", loginRequired, loginController.logout
 
 
 // Rotas de aluno
+route.post("/aluno/autentica", alunoController.alunoAutentica);
 route.post("/aluno/checar", loginController.checar);
-route.post("/aluno/enviar", loginController.enviar);
-route.post("/aluno/enviar/att", upload, alunoController.uploadFile) //tentativa de controller para download (loop infinito no envio de att)
+route.post("/aluno/enviar/:id", alunoController.enviar);
+route.post("/aluno/enviar/att",  alunoController.uploadFile);
 route.get("/aluno/index", loginRequired, alunoController.index);
 route.post("/aluno/register", loginRequired, alunoController.register);
 route.get("/aluno/index/:id", loginRequired, alunoController.editIndex);

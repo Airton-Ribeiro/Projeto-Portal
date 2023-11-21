@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-const multer = require('multer');
+const multer = require("multer");
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 10 * 1024 * 1024 }, // Limite de 10MB
+});
 const { cache } = require('ejs');
 
 const AtividadeSchema = new mongoose.Schema({
-  nomeAtt: { type: String, required: false, default: '' },
   descricao: { type: String, required: false, default: '' },
   horas: { type: Number, required: false, default: '0' },
   anexo: {
@@ -111,35 +115,51 @@ class Aluno {
     return aluno;
   }
 
-
+  static async buscaPorMatricula(matricula) {
+    if (isNaN(matricula)) {
+      console.log('A matrícula não é um número.');
+      return;
+  }
+    const aluno = await AlunoModel.find({matricula: matricula});
+    return aluno;
+  };
   //Upload de arquivos CHECAR
-  async uploadFile(req, res) {
-
-    const uploadMiddleware = upload.single('anexo');
-
-    uploadMiddleware(req, res, async (err) => {
-      if (err) {
-        return res.status(500).send(err.message);
-      }
-
-      try {
-        const anexo = new File({
-          name: req.file.originalname,
-          data: req.file.buffer,
-        });
-
-        await anexo.save();
+  static async uploadArquivo(req, res, matricula, uploadMiddleware) {
+    try {
+      // Middleware de upload
+      uploadMiddleware(req, res, async (err) => {
+        if (err) {
+          return res.status(500).send(err.message);
+        }
+  
+        // Restante do seu código para processar o upload
+        const novaAtividade = {
+          descricao: req.body.descricao,
+          horas: req.body.horas,
+          anexo: {
+            nome: req.file.originalname,
+            dados: req.file.buffer,
+          },
+          status: 'Avaliando...',
+        };
+  
+        // Atualização do aluno
+        const alunoAtualizado = await AlunoModel.findOneAndUpdate(
+          { matricula: matricula },
+          { $push: { atividades: novaAtividade } },
+          { new: true }
+        );
+        // Verifica se o aluno foi encontrado
+        if (!alunoAtualizado) {
+          return res.status(404).send('Aluno não encontrado');
+        }
+  
         res.send('Arquivo salvo no banco de dados');
-      } catch (err) {
-        res.status(500).send(err.message);
-      }
-
-      req.flash('success', 'Atividade enviada com sucesso.');
-      req.session.save(function () {
-        return res.redirect('/login/index');
       });
-
-    });
+    } catch (err) {
+      console.error('Erro ao processar a atividade:', err);
+      res.status(500).send('Erro ao processar a atividade');
+    }
   }
 }
 

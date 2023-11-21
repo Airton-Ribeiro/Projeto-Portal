@@ -1,5 +1,10 @@
 const Aluno = require('../models/AlunoModel')
-
+const multer = require("multer");
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 10 * 1024 * 1024 }, // Limite de 10MB
+});
 exports.index = (req, res) => {
   res.render('aluno', {
     aluno: {}
@@ -71,6 +76,18 @@ exports.delete = async (req, res) => {
   return;
 }
 
+exports.alunoAutentica = async (req, res) => {
+  res.render('alunoAutentica');
+};
+
+exports.enviar = async (req, res) => {
+  const matricula = req.body.matricula;
+  const aluno = await Aluno.buscaPorMatricula(matricula);
+  if (!aluno) return res.render('404');
+  console.log(aluno);
+  res.render('enviar', { aluno });
+};
+
 exports.avaliar = async (req, res) => {
   if (!req.params.id) return res.render('404');
   const aluno = await Aluno.buscaPorId(req.params.id);
@@ -81,6 +98,19 @@ exports.avaliar = async (req, res) => {
 
 //Tentativa de download de arquivo CTRL+click no "uploadFile" de baixo pra ir para a função no AlunoModel
 exports.uploadFile = async (req, res) => {
-  const aluno = new Aluno(req.body);
-  await aluno.uploadFile(req, res);
-}
+  try {
+    const matricula = req.body.matricula;
+    console.log(matricula)
+    const uploadMiddleware = upload.single('anexo');
+    console.log(req.body.matricula);
+    const aluno = await Aluno.buscaPorMatricula(matricula);
+    if(!aluno){
+      return res.render('404');
+    }
+    // Chama o método uploadArquivo do modelo passando a matrícula
+    await Aluno.uploadArquivo(req, res, aluno, uploadMiddleware);
+  } catch (err) {
+    console.error('Erro no upload do arquivo:', err);
+    res.status(500).send('Erro no upload do arquivo');
+  }
+};

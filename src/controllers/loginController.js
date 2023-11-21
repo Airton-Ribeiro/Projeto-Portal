@@ -35,9 +35,8 @@ exports.logout = function (req, res) {
     res.redirect('/login/index');
 }
 
-exports.enviar = async (req, res) => {
-    res.render('enviar');
-};
+
+
 
 exports.checar = async (req, res) => {
     res.render('checar');
