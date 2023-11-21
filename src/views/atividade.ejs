@@ -1,40 +1,52 @@
 <%- include('includes/head')%>
 <%- include('includes/nav')%>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-2"></div>
 
-        <div class="col-lg-8 my-4">
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8">
+      <div class="shadow">
+        <div class="card-body">
           <h1 class="text-center text-primary">Atividade</h1>
           <p class="text-center lead">Avalie a atividade abaixo</p>
 
-         <%- include('includes/messages') %>
-         <% if(aluno._id) { %>
-          <form action="/aluno/atividade/<%= aluno._id %>" method="POST">
-           <% } else { %>
-             <form action="/aluno/register" method="POST">
-             <% } %>
-             <input type="hidden" name="_csrf" value=<%= csrfToken %>>
-             <div class="mb-3">
-            <p>Nome: <%= aluno.nome %> <%= aluno.sobrenome %></p>
-          </div>
-          <div class="mb-3">
-            <p>Email: <%= aluno.email %></p>
-          </div>
-          <div class="mb-2">
-            <p>Matricula: <%= aluno.matricula %></p>
-          </div>
-          <div class="mb-2">
-            <p>Descrição: <%= aluno.descricao %></p>
-          </div>
-          <div class="mb-2">
-            <p>Certificado: <%= /* aluno.descricao */ %></p>
-          </div>
-          <button type="submit" class="btn btn-success">Aceitar</button>
-          <button type="submit" class="btn btn-danger">Invalidar</button>
-        </form>
-        </div>
-        <div class="col-lg-2"></div>
+          <%- include('includes/messages') %>
+
+          <form action="<% if(aluno._id) { %>/aluno/atividade/<%= aluno._id %><% } else { %>/aluno/register<% } %>" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+            <div class="mb-3">
+              <label for="nome" class="form-label">Nome do aluno</label>
+              <input id="nome" type="text" class="form-control" name="nome" value="<%= aluno.nome %>" readonly />
+            </div>
+
+            <div class="mb-3">
+              <label for="matricula" class="form-label">Matrícula</label>
+              <input id="matricula" type="text" class="form-control" name="matricula" value="<%= aluno.matricula %>" readonly />
+            </div>
+
+            <div class="mb-3">
+              <label for="anexo" class="form-label">Anexo</label>
+              <input type="file" class="form-control" id="anexo" name="anexo" disabled />
+            </div>
+
+            <div class="mb-3">
+              <label for="descricao" class="form-label">Descrição da atividade</label>
+              <textarea id="descricao" class="form-control" rows="8" name="descricao" style="resize: none;" readonly><%= aluno.descricao %></textarea>
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <button type="submit" class="btn btn-success" >Aceitar</button>
+              <button type="submit" class="btn btn-danger" >Invalidar</button>
+            </div>
+          </form>
         </div>
       </div>
-    <%- include('includes/footer')%>
+    </div>
+
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('includes/footer')%>
