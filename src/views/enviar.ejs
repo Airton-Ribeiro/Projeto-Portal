@@ -77,6 +77,8 @@
   </div>
 </div>
 
+<!-- script que coloquei para aparecer o nome do arquivo quando vc seleciona e também para aparecer o número de horas na barrinha - julio - -->
+
 <script>
   const horasInput = document.getElementById('formControlRange');
   const horasOutput = document.getElementById('horaOutput');
@@ -85,7 +87,13 @@
     horasOutput.textContent = horasInput.value;
   });
 
-</script>
+  const anexoInput = document.getElementById('anexo');
+  const anexoLabel = document.querySelector('.custom-file-label');
 
+  anexoInput.addEventListener('change', function () {
+    // Exibe o nome do arquivo selecionado no rótulo personalizado
+    anexoLabel.textContent = this.files[0].name;
+  });
+</script>
 
 <%- include('includes/footer')%>
