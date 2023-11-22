@@ -76,26 +76,31 @@ exports.delete = async (req, res) => {
   return;
 }
 
-  exports.alunoAutenticado = async (req, res) => {
-    try {
-      const matricula = req.body.matricula;
-      let aluno = await new Aluno();
-      // Supondo que você tenha um modelo Aluno definido em algum lugar
-      // Certifique-se de importar ou requerir o modelo Aluno corretamente
-      aluno = await aluno.buscaPorMatricula(matricula);
-      console.log('teste', aluno);
-        // Certifique-se de que o aluno foi encontrado
-       // Verifique se os dados do aluno estão corretos
-        // Use o _id diretamente, não precisa acessar aluno.aluno._id
-       res.redirect(`/aluno/enviar/${aluno._id}`);
+exports.alunoAutenticado = async (req, res) => {
+  try {
+    const matricula = req.body.matricula;
+    let alunoObj = new Aluno(); // Use um nome diferente para evitar conflitos de nome
+    const aluno = await alunoObj.buscaPorMatricula(matricula);
 
-        // Se o aluno não for encontrado, redirecione para alguma página de erro
-      
-    } catch (e) {
-      console.log(e);
-      return res.render('404');
+    if (alunoObj.errors.length > 0) {
+      req.flash('errors', alunoObj.errors);
+      req.session.save(function () {
+        return res.redirect('/aluno/autentica');
+      });
+      return;
     }
-  };
+    const nome = req.body.nome;
+    const horas = req.body.horas;
+    
+    const descr = req.body.descricao;
+    console.log(horas, descr);
+    await alunoObj.atualizarAtvd(aluno._id, nome, horas, descr);
+    res.redirect(`/aluno/enviar/${aluno._id}`);
+  } catch (e) {
+    console.log(e);
+    return res.render('404');
+  }
+};
 
 exports.alunoAutentica = async (req, res) => {
   res.render('alunoAutentica') 

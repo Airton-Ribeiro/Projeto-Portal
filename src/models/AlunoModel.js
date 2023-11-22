@@ -9,6 +9,7 @@ const upload = multer({
 const { cache } = require('ejs');
 
 const AtividadeSchema = new mongoose.Schema({
+  nomeatt: { type: String, required: false, default: '' },
   descricao: { type: String, required: false, default: '' },
   horas: { type: Number, required: false, default: '0' },
   anexo: {
@@ -116,15 +117,29 @@ class Aluno {
   }
 
     async buscaPorMatricula(matricula) {
-    if (isNaN(matricula)) {
-      this.errors.push('Matricula não é um numero.');
-      return;
-  }
+    if (isNaN(matricula)) this.errors.push('Matricula digitada não é um numero.');
+      if (this.errors.length > 0) return;
     const aluno = await AlunoModel.findOne({ matricula: matricula });
-    console.log(aluno);
+    if (!aluno) this.errors.push('Aluno não cadastrado');
+    if (this.errors.length > 0) return;
     return aluno
   };
-
+  async atualizarAtvd(id, nome, horas, descr) {
+    const novaAtividade = {
+      nomeatt: nome,  
+      horas: horas,
+      descricao: descr,
+      status: 'Avaliando...',
+    };
+  
+    const alunoAtualizado = await AlunoModel.findByIdAndUpdate(
+      id,
+      { $push: { atividades: novaAtividade } },
+      { new: true }
+    );
+  
+    return alunoAtualizado;
+  }
   //Upload de arquivos CHECAR
   static async uploadArquivo(req, res, matricula, uploadMiddleware) {
     try {
@@ -136,6 +151,7 @@ class Aluno {
   
         // Restante do seu código para processar o upload
         const novaAtividade = {
+          nomeatt: nome,
           descricao: req.body.descricao,
           horas: req.body.horas,
           anexo: {

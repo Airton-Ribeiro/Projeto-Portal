@@ -1,4 +1,6 @@
-<%- include('includes/head')%> <%- include('includes/nav')%>
+<%- include('includes/head')%>
+<%- include('includes/nav')%>
+
 <div class="container">
   <div class="row">
     <div class="col-lg-2"></div>
@@ -7,39 +9,56 @@
       <h1 class="text-center text-primary" id="titulo-index ">Atividades</h1>
       <p class="text-center lead" id="texto-index">Atividades para validar</p>
 
-      <%- include('includes/messages') %> <% if (alunos.length > 0) { %>
+      <%- include('includes/messages') %>
+
+      <% const existeAtividadeAvaliando = alunos.some(aluno => {
+           return aluno.atividades.some(atividade => atividade.status === 'Avaliando...');
+         }); %>
+
+      <% if (existeAtividadeAvaliando) { %>
         <div class="responsive-table shadow-sm p-3 mb-5 bg-white rounded">
-          <table class="table table-borderless table-light  border-primary table-striped">
+          <table class="table table-borderless table-light border-primary table-striped">
             <thead>
               <tr class="table-primary text-white">
                 <th scope="col" class="bg-primary">#</th>
                 <th scope="col" class="bg-primary">Nome</th>
-                <!-- <th scope="col">Sobrenome</th> -->
                 <th scope="col" class="bg-primary">Matrícula</th>
                 <th scope="col" class="bg-primary">Curso</th>
                 <th scope="col" class="bg-primary">Turno</th>
+                <th scope="col" class="bg-primary">Descrição da Atividade</th>
                 <th scope="col" class="bg-primary">Ações</th>
-                <!-- <th scope="col">E-mail</th> -->
-                <!-- <th scope="col">Data de envio</th> <<< INCLUIR ISSO DEPOIS DE CRIAR O "aluno.criadoEm" -->
               </tr>
             </thead>
 
             <tbody>
-              <% const numeroInicial = 1; %> 
-              <% const alunosReverso = alunos.slice().reverse(); %> <!-- ultimo aluno criado vai para o fim da lista -->
-              <% alunosReverso.forEach((aluno, index) => { %>
-                <tr class="tr-index">
-                      <td id="td-index"><%= index + numeroInicial %></td>
+              <% let numeroInicial = 1; %> 
+              <% const alunosOrdenados = alunos.slice().sort((a, b) => {
+                   const ultimaAtividadeA = a.atividades.length > 0 ? a.atividades[0] : null;
+                   const ultimaAtividadeB = b.atividades.length > 0 ? b.atividades[0] : null;
+
+                   if (!ultimaAtividadeA && !ultimaAtividadeB) return 0;
+                   if (!ultimaAtividadeA) return 1;
+                   if (!ultimaAtividadeB) return -1;
+
+                   return ultimaAtividadeB.criadoEm - ultimaAtividadeA.criadoEm;
+              }); %>
+
+              <% alunosOrdenados.forEach((aluno, index) => { %>
+                <% aluno.atividades.forEach((atividade, atividadeIndex) => { %>
+                  <% if (atividade.status === 'Avaliando...') { %>
+                    <tr class="tr-index">
+                      <td id="td-index"><%= numeroInicial++ %></td>
                       <td id="td-index"><%= aluno.nome %></td>
-                      <!-- <td><%= aluno.sobrenome %></td> -->
                       <td id="td-index"><%= aluno.matricula %></td>
                       <td id="td-index"><%= aluno.curso %></td>
                       <td id="td-index" class="text-center"><%= aluno.turno %></td>
-                      <!-- <td><%= aluno.email %></td> -->
+                      <td id="td-index"><%= atividade.descricao %></td>
                       <td>
-                        <a class="a-index" href="/aluno/atividade/<%= aluno._id %>">Avaliar Atividade</a>
+                        <a class="a-index" href="/aluno/atividade/<%= atividade.descricao %>">Avaliar Atividade</a>
                       </td>
-                </tr>
+                    </tr>
+                  <% } %>
+                <% }); %>
               <% }); %>
             </tbody>
           </table>
@@ -47,10 +66,10 @@
       <% } else { %>
         <p class="text-center lead">Não existem atividades a serem avaliadas.</p>
       <% } %>
-      </div>
-      
+    </div>
 
     <div class="col-lg-2"></div>
   </div>
 </div>
+
 <%- include('includes/footer')%>
