@@ -115,18 +115,16 @@ class Aluno {
     return aluno;
   }
 
-  static async buscaPorMatricula(matricula) {
+    async buscaPorMatricula(matricula) {
     if (isNaN(matricula)) {
-      console.log('A matrícula não é um número.');
+      this.errors.push('Matricula não é um numero.');
       return;
   }
-    const aluno = await AlunoModel.find({matricula: matricula});
-    return aluno;
+    const aluno = await AlunoModel.findOne({ matricula: matricula });
+    console.log(aluno);
+    return aluno
   };
 
-  static async encontrarPorMatricula(matricula){
-    
-  }
   //Upload de arquivos CHECAR
   static async uploadArquivo(req, res, matricula, uploadMiddleware) {
     try {

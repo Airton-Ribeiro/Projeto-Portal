@@ -26,9 +26,9 @@ route.get("/aluno/atividade/login/logout", loginRequired, loginController.logout
 
 // Rotas de aluno
 route.post("/aluno/autentica", alunoController.alunoAutentica);
-route.post("/aluno/autentica", alunoController.alunoAutentica);
+route.post("/aluno/autenticado", alunoController.alunoAutenticado);
 route.post("/aluno/checar", loginController.checar);
-route.post("/aluno/enviar/:id", alunoController.enviar);
+route.get("/aluno/enviar/:id", alunoController.enviar);
 route.post("/aluno/enviar/att",  alunoController.uploadFile);
 route.get("/aluno/index", loginRequired, alunoController.index);
 route.post("/aluno/register", loginRequired, alunoController.register);

@@ -76,24 +76,34 @@ exports.delete = async (req, res) => {
   return;
 }
 
+  exports.alunoAutenticado = async (req, res) => {
+    try {
+      const matricula = req.body.matricula;
+      let aluno = await new Aluno();
+      // Supondo que você tenha um modelo Aluno definido em algum lugar
+      // Certifique-se de importar ou requerir o modelo Aluno corretamente
+      aluno = await aluno.buscaPorMatricula(matricula);
+      console.log('teste', aluno);
+        // Certifique-se de que o aluno foi encontrado
+       // Verifique se os dados do aluno estão corretos
+        // Use o _id diretamente, não precisa acessar aluno.aluno._id
+       res.redirect(`/aluno/enviar/${aluno._id}`);
+
+        // Se o aluno não for encontrado, redirecione para alguma página de erro
+      
+    } catch (e) {
+      console.log(e);
+      return res.render('404');
+    }
+  };
+
 exports.alunoAutentica = async (req, res) => {
-  res.render('alunoAutentica');
-  autenticar = () => {
-    const matricula = req.body.input_matricula;
-              const aluno =  Aluno.buscaPorMatricula(matricula);
-              if(aluno){
-                res.redirect(`aluno/enviar/${aluno.aluno._id}`);
-              } 
-  }
+  res.render('alunoAutentica') 
 };
 
-exports.enviar = async (req, res) => {
-  const matricula = req.body.matricula;
-  const aluno = await Aluno.buscaPorMatricula(matricula);
-  console.log(aluno);
-  if (!aluno) return res.render('404');
-  
-  res.render('enviar', { myObj: path });
+exports.enviar = async (req, res) => { 
+  const aluno = await Aluno.buscaPorId(req.params.id);
+  res.render('enviar', { aluno });
 };
 
 exports.avaliar = async (req, res) => {

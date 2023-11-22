@@ -6,6 +6,7 @@ exports.index = (req, res) => {
 };
 
 exports.login = async (req, res) => {
+    console.log('teste');
     try {
         const login = new Login(req.body);
         await login.login();
