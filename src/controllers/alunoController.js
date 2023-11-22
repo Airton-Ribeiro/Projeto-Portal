@@ -78,14 +78,22 @@ exports.delete = async (req, res) => {
 
 exports.alunoAutentica = async (req, res) => {
   res.render('alunoAutentica');
+  autenticar = () => {
+    const matricula = req.body.input_matricula;
+              const aluno =  Aluno.buscaPorMatricula(matricula);
+              if(aluno){
+                res.redirect(`aluno/enviar/${aluno.aluno._id}`);
+              } 
+  }
 };
 
 exports.enviar = async (req, res) => {
   const matricula = req.body.matricula;
   const aluno = await Aluno.buscaPorMatricula(matricula);
-  if (!aluno) return res.render('404');
   console.log(aluno);
-  res.render('enviar', { aluno });
+  if (!aluno) return res.render('404');
+  
+  res.render('enviar', { myObj: path });
 };
 
 exports.avaliar = async (req, res) => {

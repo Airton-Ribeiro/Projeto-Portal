@@ -123,6 +123,10 @@ class Aluno {
     const aluno = await AlunoModel.find({matricula: matricula});
     return aluno;
   };
+
+  static async encontrarPorMatricula(matricula){
+    
+  }
   //Upload de arquivos CHECAR
   static async uploadArquivo(req, res, matricula, uploadMiddleware) {
     try {
