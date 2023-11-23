@@ -1,0 +1,21 @@
+<%- include('includes/head') %>
+
+<div class="container mt-5">
+  <h1 class="text-center">Suas atividades</h1>
+
+  <% if (aluno && aluno.atividades.length > 0) { %>
+    <ul class="list-group mt-4">
+      <% aluno.atividades.forEach(function(atividade) { %>
+        <li class="list-group-item">
+          <h4><%= atividade.nomeatt %></h4>
+          <p><strong>Descrição:</strong> <%= atividade.descricao %></p>
+          <p><strong>Horas:</strong> <%= atividade.horas %> horas</p>
+          <p><strong>Status:</strong> <%= atividade.status %></p>
+          <!-- Adicione mais detalhes conforme necessário -->
+        </li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p class="text-center">Você não tem nenhuma.</p>
+  <% } %>
+</div>

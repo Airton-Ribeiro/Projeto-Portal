@@ -29,6 +29,8 @@ route.get("/aluno/atividade/login/logout", loginRequired, loginController.logout
 route.post("/anexo/enviado/:id", alunoController.anexoEnviado);
 route.get("/aluno/autentica", alunoController.alunoAutentica);
 route.post("/aluno/autenticado", alunoController.alunoAutenticado);
+route.post("/aluno/autenticado2", alunoController.alunoAutenticado2);
+route.get("/aluno/checado/:id", alunoController.checar)//ddd
 route.post("/aluno/checar", loginController.checar);
 route.get("/aluno/enviar/:id", alunoController.enviar);
 route.get("/aluno/index", loginRequired, alunoController.index);

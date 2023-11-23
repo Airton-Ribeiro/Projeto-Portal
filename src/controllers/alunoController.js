@@ -90,7 +90,7 @@ exports.alunoAutenticado = async (req, res) => {
       return;
     }
     const nome = req.body.nome;
-    const horas = req.body.horas; 
+    const horas = req.body.horas;
     const descr = req.body.descricao;
     await alunoObj.atualizarAtvd(aluno._id, nome, horas, descr);
     res.redirect(`/aluno/enviar/${aluno._id}`);
@@ -100,14 +100,45 @@ exports.alunoAutenticado = async (req, res) => {
   }
 };
 
-exports.alunoAutentica = async (req, res) => {
-  res.render('alunoAutentica') 
+
+exports.alunoAutenticado2 = async (req, res) => {
+  try {
+    const matricula = req.body.matricula;
+    let alunoObj = new Aluno(); // Use um nome diferente para evitar conflitos de nome
+    const aluno = await alunoObj.buscaPorMatricula(matricula);
+
+    if (alunoObj.errors.length > 0) {
+      req.flash('errors', alunoObj.errors);
+      req.session.save(function () {
+        return res.redirect('404');
+      });
+      return;
+    }
+    const nome = req.body.nome;
+    const horas = req.body.horas;
+    const descr = req.body.descricao;
+    await alunoObj.atualizarAtvd(aluno._id, nome, horas, descr);
+    res.redirect(`/aluno/checado/${aluno._id}`);
+  } catch (e) {
+    console.log(e);
+    return res.render('404');
+  }
 };
 
-exports.enviar = async (req, res) => { 
-  const aluno = await Aluno.buscaPorId(req.params.id);
-  res.render('enviar', { aluno }); 
 
+exports.alunoAutentica = async (req, res) => {
+  res.render('alunoAutentica')
+};
+
+exports.enviar = async (req, res) => {
+  const aluno = await Aluno.buscaPorId(req.params.id);
+  res.render('enviar', { aluno });
+
+};
+
+exports.checar = async (req, res) => {
+  const aluno = await Aluno.buscaPorId(req.params.id);
+  res.render('checado', { aluno });
 };
 
 exports.avaliar = async (req, res) => {
@@ -143,7 +174,7 @@ exports.anexoEnviado = async (req, res) => {
 
     // Obter o último elemento do array de atividades
     const ultimaAtividade = aluno.atividades[aluno.atividades.length - 1];
-  
+
     if (!ultimaAtividade) {
       console.error('Nenhuma atividade encontrada');
       res.status(400).send('Nenhuma atividade encontrada');
