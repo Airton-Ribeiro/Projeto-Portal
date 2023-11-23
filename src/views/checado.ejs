@@ -1,0 +1,25 @@
+<%- include('includes/head') %>
+<div id="bg-image">
+  <div class="container vh-500 shadow " id="bg-light" style="background-color: rgba(255, 255, 255, 0.952);">
+    
+
+    <% if (aluno && aluno.atividades.length > 0) { %>
+      <ul class="list-group">
+        <h1 class="text-center mb-5 mt-5 col-md-4  text-primary">Suas Atividades</h1>
+        <% aluno.atividades.forEach(function(atividade) { %>
+          <li class="list-group-item text-white rounded" style="background-color:rgb(83, 150, 238);" >
+            <h3 class="mb-3"><%= atividade.nomeatt %></h3>
+            <p><strong>Descrição:</strong> <%= atividade.descricao %></p>
+            <p><strong>Horas:</strong> <%= atividade.horas %> horas</p>
+            <p><strong>Status:</strong> <%= atividade.status %></p>
+            <!-- Adicione mais detalhes conforme necessário -->
+          </li>
+          <p></p>
+        <% }); %>
+      </ul>
+    <% } else { %>
+      <p class="text-center mt-4 text-primary">Você não tem nenhuma atividade.</p>
+    <% } %>
+  </div>
+</div>
+<%- include('includes/footer') %>

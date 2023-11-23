@@ -37,7 +37,6 @@ exports.logout = function (req, res) {
 
 
 
-
 exports.checar = async (req, res) => {
     res.render('checar');
 };
