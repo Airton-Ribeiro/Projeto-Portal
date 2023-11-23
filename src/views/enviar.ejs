@@ -1,15 +1,23 @@
-<%- include('includes/head')%>
+<%- include('includes/head') %>
+
+<style>
+  .custom-file-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>
+
 <div id="bg-image">
   <div class="container">
-    <div class="row justify-content-center align-items-center vh-100">
-      <div
-        class="col-lg-8 my-4"
-        style="background-color: white; border-radius: 5px"
-      >
+    <div class="row justify-content-center align-items-center vh-100" >
+      <div class="col-lg-8 my-4" style="background-color: white; border-radius: 5px; ">
         <form action="/anexo/enviado" method="POST">
+          <h3 class="text-center mb-4 mx-auto">
+            Faça o envio da atividade abaixo
+          </h3>
           <div class="form-group row mt-4">
-            <label for="nome" class="col-sm-2 col-form-label">Nome</label>
-            <div class="col-sm-10">
+            <div class="col-sm-12 col-md-6">
+              <label for="nome" class="col-form-label text-left">Nome</label>
               <input
                 type="name"
                 class="form-control"
@@ -18,12 +26,8 @@
                 readonly
               />
             </div>
-          </div>
-          <div class="form-group row">
-            <label for="matricula" class="col-sm-2 col-form-label"
-              >Matricula</label
-            >
-            <div class="col-sm-10">
+            <div class="col-sm-12 col-md-6">
+              <label for="matricula" class="col-form-label text-left">Matrícula</label>
               <input
                 type="name"
                 class="form-control"
@@ -34,22 +38,18 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="turno" class="col-sm-2 col-form-label">Curso</label>
-            <div class="col-sm-10">
+            <div class="col-sm-12 col-md-6">
+              <label for="turno" class="col-form-label text-left">Curso</label>
               <input
                 type="name"
                 class="form-control"
                 id="turno"
-                value="<%= aluno.curso%>"
+                value="<%= aluno.curso %>"
                 readonly
               />
             </div>
-            <div class="col-sm-10"></div>
-          </div>
-          <div class="form-group row"></div>
-          <div class="form-group row">
-            <label for="turma" class="col-sm-2 col-form-label">Turma</label>
-            <div class="col-sm-10">
+            <div class="col-sm-12 col-md-6">
+              <label for="turma" class="col-form-label text-left">Turma</label>
               <input
                 type="name"
                 class="form-control"
@@ -58,24 +58,17 @@
                 readonly
               />
             </div>
-            <div class="col-sm-10"></div>
           </div>
-          <div class="form-group row"></div>
         </form>
+
         <form
           action="/anexo/enviado/<%= aluno._id %>"
           method="POST"
-          class="row shadow p-3 rounded"
+          class="row shadow p-3 rounded d-flex justify-content-center align-items-center"
           enctype="multipart/form-data"
-          style="
-            background-color: white;
-            box-shadow: 1px 1px 5px rgb(255, 0, 0);
-          "
+          style="background-color: white; box-shadow: 1px 1px 5px rgb(255, 0, 0);"
         >
-          <h3 class="text-center mb-4 mx-auto">
-            Faça o envio da atividade abaixo
-          </h3>
-          <div class="col-lg-6 mb-3">
+          <div class="col-lg-6 align-items-center justify-content-center">
             <div class="d-flex flex-column mt-0">
               <div class="input-group">
                 <div class="custom-file">
@@ -90,14 +83,13 @@
                     class="custom-file-label"
                     for="anexo"
                     data-browse="Anexar"
-                    >Escolher arquivo</label
                   >
-                  <!--tentativa de upload de arquivo. Realmente necessário todos os campos nessa div? -->
+                    Escolher arquivo
+                  </label>
                 </div>
               </div>
             </div>
           </div>
-
           <div class="col-lg-6 mb-2">
             <div class="mt-2">
               <button type="submit" class="btn btn-primary btn-block">
@@ -111,23 +103,14 @@
   </div>
 </div>
 
-<!-- script que coloquei para aparecer o nome do arquivo quando vc seleciona e também para aparecer o número de horas na barrinha - julio - -->
-
 <script>
-  const horasInput = document.getElementById("formControlRange");
-  const horasOutput = document.getElementById("horaOutput");
-
-  horasInput.addEventListener("input", function () {
-    horasOutput.textContent = horasInput.value;
-  });
-
   const anexoInput = document.getElementById("anexo");
   const anexoLabel = document.querySelector(".custom-file-label");
 
   anexoInput.addEventListener("change", function () {
     // Exibe o nome do arquivo selecionado no rótulo personalizado
-    anexoLabel.textContent = this.files[0].name;
+    anexoLabel.textContent = this.files.length > 0 ? this.files[0].name : 'Escolher arquivo';
   });
 </script>
 
-<%- include('includes/footer')%>
+<%- include('includes/footer') %>
