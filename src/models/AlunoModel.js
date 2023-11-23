@@ -31,6 +31,33 @@ const AlunoSchema = new mongoose.Schema({
   atividades: [AtividadeSchema],
 });
 
+AlunoSchema.methods.attAnexo = async function (atividadeId, nome, dados) {
+  console.log('teste2');
+  const novoAnexo = {
+    nome: nome,
+    dados: dados,
+  };
+  console.log('teste3', novoAnexo);
+  
+  // Encontrar a atividade específica pelo _id
+  const atividade = this.atividades.id(atividadeId);
+  
+  if (!atividade) {
+    console.error('Atividade não encontrada');
+    return null; // Ou você pode lançar um erro, dependendo do seu tratamento de erro desejado
+  }
+
+  // Atualizar o anexo da atividade específica
+  atividade.anexo = novoAnexo;
+
+  // Salvar as alterações no documento
+  const alunoAtualizado = await this.save();
+  
+  console.log('teste4');
+  return alunoAtualizado;
+};
+
+
 const AlunoModel = mongoose.model('Aluno', AlunoSchema);
 
 class Aluno {
@@ -124,6 +151,9 @@ class Aluno {
     if (this.errors.length > 0) return;
     return aluno
   };
+
+  
+
   async atualizarAtvd(id, nome, horas, descr) {
     const novaAtividade = {
       nomeatt: nome,  
@@ -139,46 +169,9 @@ class Aluno {
     );
   
     return alunoAtualizado;
-  }
+  };
   //Upload de arquivos CHECAR
-  static async uploadArquivo(req, res, matricula, uploadMiddleware) {
-    try {
-      // Middleware de upload
-      uploadMiddleware(req, res, async (err) => {
-        if (err) {
-          return res.status(500).send(err.message);
-        }
-  
-        // Restante do seu código para processar o upload
-        const novaAtividade = {
-          nomeatt: nome,
-          descricao: req.body.descricao,
-          horas: req.body.horas,
-          anexo: {
-            nome: req.file.originalname,
-            dados: req.file.buffer,
-          },
-          status: 'Avaliando...',
-        };
-  
-        // Atualização do aluno
-        const alunoAtualizado = await AlunoModel.findOneAndUpdate(
-          { matricula: matricula },
-          { $push: { atividades: novaAtividade } },
-          { new: true }
-        );
-        // Verifica se o aluno foi encontrado
-        if (!alunoAtualizado) {
-          return res.status(404).send('Aluno não encontrado');
-        }
-  
-        res.send('Arquivo salvo no banco de dados');
-      });
-    } catch (err) {
-      console.error('Erro ao processar a atividade:', err);
-      res.status(500).send('Erro ao processar a atividade');
-    }
-  }
+   
 }
 
 

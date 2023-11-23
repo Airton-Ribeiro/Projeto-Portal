@@ -25,7 +25,7 @@
                 <th scope="col" class="bg-primary">Matrícula</th>
                 <th scope="col" class="bg-primary">Curso</th>
                 <th scope="col" class="bg-primary">Turno</th>
-                <th scope="col" class="bg-primary">Descrição da Atividade</th>
+                <th scope="col" class="bg-primary">Nome da Atividade</th>
                 <th scope="col" class="bg-primary">Ações</th>
               </tr>
             </thead>
@@ -52,9 +52,9 @@
                       <td id="td-index"><%= aluno.matricula %></td>
                       <td id="td-index"><%= aluno.curso %></td>
                       <td id="td-index" class="text-center"><%= aluno.turno %></td>
-                      <td id="td-index"><%= atividade.descricao %></td>
+                      <td id="td-index"><%= atividade.nomeatt %></td>
                       <td>
-                        <a class="a-index" href="/aluno/atividade/<%= atividade.descricao %>">Avaliar Atividade</a>
+                        <a class="a-index" href="/aluno/atividade/<%= aluno._id %>">Avaliar Atividade</a>
                       </td>
                     </tr>
                   <% } %>
