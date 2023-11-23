@@ -2,14 +2,14 @@
     <div class="container">
       <div class="row d-flex justify-content-center align-items-center">
         <div class="col-lg-8 my-4">
-          <h1 class="text-center">Faça o envio das atividades enviadas abaixo</h1>
+          <h1 class="text-center text-primary">Faça o envio das atividades enviadas abaixo</h1>
 
           <%- include('includes/messages') %>
           <form action="/aluno/autenticado" method="POST">
-          <div>
+          <div class="container">
               <div class="mb-3">
-                <label class="form-label">Matricula</label>
-                <input value="Digite sua matricula" type="tel" class="form-control" name="matricula">
+                <label class="form-label">Matrícula</label>
+                <input placeholder="Digite sua matrícula" type="number" class="form-control" name="matricula">
               </div>    
               <div class="col-lg-6 mb-3">
                 <div class="d-flex flex-column">
