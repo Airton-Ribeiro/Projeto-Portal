@@ -1,21 +1,23 @@
 <%- include('includes/head')%>
-<div class="container-fluid vh-100 d-flex align-items-center justify-content-center" id="bg-image">
+<div class="container-fluid d-flex align-items-center justify-content-center vh-100" id="bg-image">
   <div class="row d-flex justify-content-center align-items-center vh-100">
     <div class="col-lg-8 my-4 text-center">
       <form action="/aluno/autenticado2" method="POST">
-        <div class="mb-3 shadow-lg p-3 mb-5 bg-body rounded" style="background-color: white;">
+        <div class="mb-5 shadow-lg p-4 mb-5 bg-body rounded " style="background-color: white; min-height: 30vh;"> <!-- Adicionei min-height para garantir um tamanho mínimo vertical -->
           <h1 class="text-primary mb-4">Cheque as atividades enviadas abaixo</h1>
-          <div class="row justify-content-center"> <!-- Adicionei justify-content-center para centralizar a row -->
-            <div class="col-md-7 order-md-2 mb-0 text-md-left"> <!-- Alterei para col-md-12 e adicionei text-md-left para alinhar à esquerda -->
-              <label class="form-label" for="matricula:">Matrícula:</label>
-            </div>
-            <div class="col-md-7 order-md-3 mb-3"> <!-- Aumentei a largura da coluna para col-md-7 -->
-              <input value="" type="tel" class="form-control" name="matricula" id="matricula">
-            </div>
-          </div>
-          <div class="row justify-content-center"> <!-- Adicionei justify-content-center para centralizar a row -->
-            <div class="col-md-3 col-1 order-md-4"> <!-- Alterei de col-md-4 para col-md-3 -->
-              <button type="submit" class="btn btn-primary btn-md">Checar</button>
+          <div class="row justify-content-center"> 
+            
+            <div class="col-9">
+             
+              <div class="input-group">
+                <input value="" type="tel" class="form-control" placeholder="Digite sua matrícula" name="matricula" id="matricula">
+                
+                <div class="input-group-btn bg-primary">
+                  <button class="btn btn-default text-white rounded" type="submit">Checar</button>
+                </div>
+
+              </div>
+
             </div>
           </div>
         </div>
