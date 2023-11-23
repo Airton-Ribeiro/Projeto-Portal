@@ -32,12 +32,10 @@ const AlunoSchema = new mongoose.Schema({
 });
 
 AlunoSchema.methods.attAnexo = async function (atividadeId, nome, dados) {
-  console.log('teste2');
   const novoAnexo = {
     nome: nome,
     dados: dados,
   };
-  console.log('teste3', novoAnexo);
   
   // Encontrar a atividade específica pelo _id
   const atividade = this.atividades.id(atividadeId);
@@ -53,7 +51,6 @@ AlunoSchema.methods.attAnexo = async function (atividadeId, nome, dados) {
   // Salvar as alterações no documento
   const alunoAtualizado = await this.save();
   
-  console.log('teste4');
   return alunoAtualizado;
 };
 
@@ -131,6 +128,31 @@ class Aluno {
     const aluno = await AlunoModel.findById(id);
     return aluno;
   };
+  static async buscaPorATT(id) {
+    if (typeof id !== 'string') return;
+    const aluno = await AlunoModel.findOne({ 'atividades._id': id });
+
+    if (!aluno) {
+        return null; // Ou algo apropriado para indicar que o aluno não foi encontrado
+    }
+
+    return aluno.atividades; // Retorna diretamente a lista de atividades
+};
+static async buscaPorDownload(id) {
+  if (typeof id !== 'string') return;
+    const aluno = await AlunoModel.findOne({ 'atividades._id': id });
+
+    if (!aluno || !aluno.atividades) {
+        return null;
+    }
+
+    // Encontrar a atividade específica com base no ID fornecido
+    const atividade = aluno.atividades.find((a) => a._id.toString() === id);
+
+    console.log(atividade); // Adicione este log para verificar a atividade
+
+    return atividade; // Retorna diretamente a lista de atividades
+};
 
   static async buscaAlunos() {
     const alunos = await AlunoModel.find()

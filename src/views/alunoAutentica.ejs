@@ -5,13 +5,13 @@
       <h1 class="text-center text-primary">Envie as atividades abaixo</h1>
 
       <%- include('includes/messages') %>
-      <form action="/aluno/autenticado" method="POST" style="margin-top: 60px;">
+      <form action="/aluno/autenticado" method="POST" style="margin-top: 30px;">
         <div class="container" >
-          <div class="row mb-3">
+          <div class="row mb-0">
             <div class="col-6">
               <div class="mb-3">
                 <label class="form-label">Nome da atividade</label>
-                <input id="nome" type="text" class="form-control" name="nome" required />
+                <input placeholder="Atividade exemplo" id="nome" type="text" class="form-control" name="nome" required />
               </div>
               <div class="mb-3">
                 <label class="form-label">Matrícula</label>

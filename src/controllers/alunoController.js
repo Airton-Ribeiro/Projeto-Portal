@@ -1,4 +1,5 @@
-const Aluno = require('../models/AlunoModel')
+const Aluno = require('../models/AlunoModel');
+const Atividade = require('../models/AlunoModel');
 const multer = require("multer");
 const storage = multer.memoryStorage();
 const upload = multer({
@@ -143,10 +144,30 @@ exports.checar = async (req, res) => {
 
 exports.avaliar = async (req, res) => {
   if (!req.params.id) return res.render('404');
-  const aluno = await Aluno.buscaPorId(req.params.id);
-  if (!aluno) return res.render('404');
-  res.render('atividade', { aluno });
+  const atividades = await Aluno.buscaPorATT(req.params.id);
+  res.render('atividade', { atividades, req });
 };
+
+exports.downloadArquivo = async (req, res) => {
+  try {
+    const atividade = await Atividade.buscaPorDownload(req.params.id);
+
+    if (!atividade || !atividade.anexo) {
+      return res.status(404).send('Anexo não encontrado');
+    }
+
+    // Configurando o cabeçalho da resposta para indicar que é um arquivo para download
+    res.setHeader('Content-disposition', `attachment; filename=${atividade.anexo.nome}`);
+    res.setHeader('Content-type', 'application/pdf');
+
+    // Enviando os dados do anexo como resposta
+    res.send(atividade.anexo.dados);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Erro ao baixar o anexo');
+  }
+};
+
 
 exports.anexoEnviado = async (req, res) => {
   try {
@@ -163,15 +184,13 @@ exports.anexoEnviado = async (req, res) => {
         }
 
         const nome = req.file.originalname;
-        const dados = req.file.buffer;
-
+        const dados = Buffer.from(req.file.buffer, 'base64');
         // Resolva a Promise com os dados do upload
         resolve({ nome, dados });
       });
     });
 
     const { nome, dados } = await uploadPromise;
-
     // Obter o último elemento do array de atividades
     const ultimaAtividade = aluno.atividades[aluno.atividades.length - 1];
 
