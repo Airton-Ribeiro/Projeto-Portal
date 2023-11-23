@@ -157,9 +157,11 @@ exports.anexoEnviado = async (req, res) => {
 
     // Agora você pode usar idDaAtividade no método attAnexo
     await alunoObj.attAnexo(idDaAtividade, nome, dados);
-
     console.log('Upload de arquivo concluído com sucesso!');
-    res.status(200).send('Upload de arquivo concluído com sucesso!');
+    req.flash('success', 'Sua atividade foi enviada com sucesso');
+    req.session.save(function () {
+      return res.redirect(`/login/index`);
+    });
   } catch (err) {
     console.error('Erro no upload do arquivo:', err);
     res.status(500).send('Erro no upload do arquivo');
