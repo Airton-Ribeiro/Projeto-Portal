@@ -90,10 +90,8 @@ exports.alunoAutenticado = async (req, res) => {
       return;
     }
     const nome = req.body.nome;
-    const horas = req.body.horas;
-    
+    const horas = req.body.horas; 
     const descr = req.body.descricao;
-    console.log(horas, descr);
     await alunoObj.atualizarAtvd(aluno._id, nome, horas, descr);
     res.redirect(`/aluno/enviar/${aluno._id}`);
   } catch (e) {
@@ -108,7 +106,8 @@ exports.alunoAutentica = async (req, res) => {
 
 exports.enviar = async (req, res) => { 
   const aluno = await Aluno.buscaPorId(req.params.id);
-  res.render('enviar', { aluno });
+  res.render('enviar', { aluno }); 
+
 };
 
 exports.avaliar = async (req, res) => {
@@ -118,22 +117,52 @@ exports.avaliar = async (req, res) => {
   res.render('atividade', { aluno });
 };
 
-
-//Tentativa de download de arquivo CTRL+click no "uploadFile" de baixo pra ir para a função no AlunoModel
-exports.uploadFile = async (req, res) => {
+exports.anexoEnviado = async (req, res) => {
   try {
-    const matricula = req.body.matricula;
-    console.log(matricula)
-    const uploadMiddleware = upload.single('anexo');
-    console.log(req.body.matricula);
-    const aluno = await Aluno.buscaPorMatricula(matricula);
-    if(!aluno){
-      return res.render('404');
+    let alunoObj = new Aluno();
+    const aluno = await Aluno.buscaPorId(req.params.id);
+    alunoObj = aluno;
+
+    const uploadPromise = new Promise((resolve, reject) => {
+      upload.single('anexo')(req, res, (err) => {
+        if (err) {
+          console.error('Erro no upload do arquivo:', err);
+          reject('Erro no upload do arquivo');
+          return;
+        }
+
+        const nome = req.file.originalname;
+        const dados = req.file.buffer;
+
+        // Resolva a Promise com os dados do upload
+        resolve({ nome, dados });
+      });
+    });
+
+    const { nome, dados } = await uploadPromise;
+
+    // Obter o último elemento do array de atividades
+    const ultimaAtividade = aluno.atividades[aluno.atividades.length - 1];
+  
+    if (!ultimaAtividade) {
+      console.error('Nenhuma atividade encontrada');
+      res.status(400).send('Nenhuma atividade encontrada');
+      return;
     }
-    // Chama o método uploadArquivo do modelo passando a matrícula
-    await Aluno.uploadArquivo(req, res, aluno, uploadMiddleware);
+
+    const idDaAtividade = ultimaAtividade._id;
+
+    console.log('Dados do upload:', nome, dados);
+    console.log('ID da atividade:', idDaAtividade);
+
+    // Agora você pode usar idDaAtividade no método attAnexo
+    await alunoObj.attAnexo(idDaAtividade, nome, dados);
+
+    console.log('Upload de arquivo concluído com sucesso!');
+    res.status(200).send('Upload de arquivo concluído com sucesso!');
   } catch (err) {
     console.error('Erro no upload do arquivo:', err);
     res.status(500).send('Erro no upload do arquivo');
   }
 };
+
