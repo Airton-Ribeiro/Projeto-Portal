@@ -115,10 +115,6 @@ exports.alunoAutenticado2 = async (req, res) => {
       });
       return;
     }
-    const nome = req.body.nome;
-    const horas = req.body.horas;
-    const descr = req.body.descricao;
-    await alunoObj.atualizarAtvd(aluno._id, nome, horas, descr);
     res.redirect(`/aluno/checado/${aluno._id}`);
   } catch (e) {
     console.log(e);
