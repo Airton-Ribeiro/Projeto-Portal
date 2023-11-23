@@ -15,7 +15,7 @@
 
           <% const atividadeDesejada = atividades.find(atividade => atividade._id.toString() === req.params.id); %>
 
-          <form action="" method="POST">
+          
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
             <div class="mb-3">
@@ -33,7 +33,10 @@
             </div>
 
             <div class="d-flex justify-content-between">
+              <form action="/atividade/valida/<%= atividadeDesejada._id %>" method="POST">
               <button type="submit" class="btn btn-success">Aceitar</button>
+            </form>
+            <form action="/atividade/invalida/<%= atividadeDesejada._id %>" method="POST">
               <button type="submit" class="btn btn-danger">Invalidar</button>
             </div>
           </form>

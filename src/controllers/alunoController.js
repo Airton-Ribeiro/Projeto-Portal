@@ -137,6 +137,41 @@ exports.downloadArquivo = async (req, res) => {
   }
 };
 
+exports.atividadeInvalida = async (req, res) => {
+  try {
+    const atividadeId = req.params.id;
+
+    if (!atividadeId) return res.render('404');
+
+    const atvdObj = new Aluno();
+
+    // Chama o método para invalidar a atividade
+    await atvdObj.invalidate(atividadeId);
+
+    res.redirect('/');
+  } catch (error) {
+    console.error('Erro ao atualizar o status da atividade:', error);
+    res.status(500).send('Erro ao atualizar o status da atividade');
+  }
+};
+
+exports.atividadeValida = async (req, res) => {
+  try {
+    const atividadeId = req.params.id;
+
+    if (!atividadeId) return res.render('404');
+
+    const atvdObj = new Aluno();
+
+    // Chama o método para invalidar a atividade
+    await atvdObj.validate(atividadeId);
+
+    res.redirect('/');
+  } catch (error) {
+    console.error('Erro ao atualizar o status da atividade:', error);
+    res.status(500).send('Erro ao atualizar o status da atividade');
+  }
+};
 
 exports.anexoEnviado = async (req, res) => {
   try {
@@ -171,8 +206,6 @@ exports.anexoEnviado = async (req, res) => {
 
     const idDaAtividade = ultimaAtividade._id;
 
-    console.log('Dados do upload:', nome, dados);
-    console.log('ID da atividade:', idDaAtividade);
 
     // Agora você pode usar idDaAtividade no método attAnexo
     await alunoObj.attAnexo(idDaAtividade, nome, dados);

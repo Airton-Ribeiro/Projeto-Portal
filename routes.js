@@ -26,6 +26,8 @@ route.get("/aluno/atividade/login/logout", loginRequired, loginController.logout
 
 // Rotas de aluno
 // route.post("/aluno/autentica", alunoController.alunoAutentica);
+route.post("/atividade/invalida/:id", alunoController.atividadeInvalida);
+route.post("/atividade/valida/:id", alunoController.atividadeValida);
 route.get("/download/:id", alunoController.downloadArquivo);
 route.post("/anexo/enviado/:id", alunoController.anexoEnviado);
 route.get("/aluno/autentica", alunoController.alunoAutentica);

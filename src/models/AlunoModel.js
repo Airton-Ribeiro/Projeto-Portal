@@ -53,6 +53,20 @@ AlunoSchema.methods.attAnexo = async function (atividadeId, nome, dados) {
   
   return alunoAtualizado;
 };
+AlunoSchema.methods.mudaStatus = async function (status) {
+  try {
+    // Usa 'this._id' para obter o ID da instância
+    const alunoAtualizado = await AlunoModel.findOneAndUpdate(
+      { 'atividades._id': this._id },
+      { $set: { 'atividades.$.status': status } },
+      { new: true }
+    );
+
+    return alunoAtualizado;
+  } catch (error) {
+    throw error;
+  }
+};
 
 
 const AlunoModel = mongoose.model('Aluno', AlunoSchema);
@@ -174,7 +188,24 @@ static async buscaPorDownload(id) {
     return aluno
   };
 
+  async invalidate(atividadeId) {
+    const aluno = await AlunoModel.findOneAndUpdate(
+      { 'atividades._id': atividadeId },
+      { $set: { 'atividades.$.status': 'Inválido' } },
+      { new: true }
+    );
   
+    return aluno;
+  }
+  async validate(atividadeId) {
+    const aluno = await AlunoModel.findOneAndUpdate(
+      { 'atividades._id': atividadeId },
+      { $set: { 'atividades.$.status': 'Válida' } },
+      { new: true }
+    );
+  
+    return aluno;
+  }
 
   async atualizarAtvd(id, nome, horas, descr) {
     const novaAtividade = {
