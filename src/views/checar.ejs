@@ -1,17 +1,26 @@
 <%- include('includes/head')%>
-    <div class="container">
-      <div class="row d-flex justify-content-center align-items-center">
-        <div class="col-lg-8 my-4">
-          <h1 class="text-center text-primary">Faça a checagem das atividades enviadas abaixo</h1>
-          <form action="">
-          <div>
-              <div class="mb-3 shadow p-3 mb-5 bg-body rounded">
-                <label class="form-label" for="matricula">Matrícula</label>
-                <input value="" type="tel" class="form-control mb-3" name="matricula" id="matricula">
-                <button type="submit" class="btn btn-primary">Checar</button>
-              </div>       
-            </form>
+<div class="container-fluid vh-100 d-flex align-items-center justify-content-center" id="bg-image">
+  <div class="row d-flex justify-content-center align-items-center vh-100">
+    <div class="col-lg-8 my-4 text-center">
+      <form action="">
+        <div class="mb-3 shadow-lg p-3 mb-5 bg-body rounded" style="background-color: white;">
+          <h1 class="text-primary mb-4">Cheque as atividades enviadas abaixo</h1>
+          <div class="row justify-content-center"> <!-- Adicionei justify-content-center para centralizar a row -->
+            <div class="col-md-7 order-md-2 mb-0 text-md-left"> <!-- Alterei para col-md-12 e adicionei text-md-left para alinhar à esquerda -->
+              <label class="form-label" for="matricula:">Matrícula:</label>
+            </div>
+            <div class="col-md-7 order-md-3 mb-3"> <!-- Aumentei a largura da coluna para col-md-7 -->
+              <input value="" type="tel" class="form-control" name="matricula" id="matricula">
+            </div>
+          </div>
+          <div class="row justify-content-center"> <!-- Adicionei justify-content-center para centralizar a row -->
+            <div class="col-md-3 col-1 order-md-4"> <!-- Alterei de col-md-4 para col-md-3 -->
+              <button type="submit" class="btn btn-primary btn-md">Checar</button>
+            </div>
+          </div>
         </div>
-        </div>
-      </div>
-    <%- include('includes/footer')%>
+      </form>
+    </div>
+  </div>
+</div>
+<%- include('includes/footer')%>
